@@ -1,0 +1,9 @@
+<%= form_tag("/books/#{@book.id}/edit", method: "put") do %>
+  <%= label_tag('book["title"]',"Title") %>
+  <%= text_field_tag('book["title"]') %> 
+
+  <%= label_tag('book["description"]',"Description") %>
+  <%= text_field_tag('book["description"]') %>
+
+  <%= submit_tag("Edit Book") %>
+<% end %>  

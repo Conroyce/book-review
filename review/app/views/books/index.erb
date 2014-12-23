@@ -1,0 +1,10 @@
+<%= form_for @book do |f| %>
+  Title: <%= f.text_field :title %>
+  Description: <%= f.text_field :description %>
+  <%= f.submit("Add Book") %>
+<% end %>
+
+<% @books.each do |book| %>
+  <a href="/books/<%= book.id %>/edit"><%= book.title %></a><br>
+  <%= book.description %><br>
+<% end %>
