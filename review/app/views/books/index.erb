@@ -8,3 +8,25 @@
   <a href="/books/<%= book.id %>"><%= book.title %></a><br>
   <%= book.description %><br>
 <% end %>
+
+<div class="main">
+</div>
+
+<script id="book-template" type="text/x-handlebars-template">
+  <div class="entry">
+    <table>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Image</th>
+      </tr>
+      {{#each this.books}}
+        <tr>
+          <td class="title">{{title}}</td>
+          <td class="author">{{authors}}</td>
+          <td class="imgs"><img src={{img}}></td>
+        </tr>
+      {{/each}}
+    </table>
+  </div>
+</script>
