@@ -9,6 +9,11 @@
   <%= book.description %><br>
 <% end %>
 
+<div class="search-div">
+  <input type="text" placeholder="Search Books" id="searchBox" name="searchBox">
+  <input type="submit" value="Search" class="searchButton">
+</div>
+
 <div class="main">
 </div>
 
@@ -24,7 +29,7 @@
         <tr>
           <td class="title">{{title}}</td>
           <td class="author">{{authors}}</td>
-          <td class="imgs"><img src={{img}}></td>
+          <td class="imgs"><img src={{img}} ></td>
         </tr>
       {{/each}}
     </table>
