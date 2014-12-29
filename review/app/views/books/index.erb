@@ -1,7 +1,10 @@
-
-<%= link_to "Sign In", log_in_path %>
-
-<%= link_to "Sign Up", users_path %>
+<% if current_user %>
+  Welcome, <%= current_user.name %>!<br>
+  <%= link_to "Sign Out", log_out_path %>
+<% else %>   
+  <%= link_to "Sign In", log_in_path %>
+  <%= link_to "Sign Up", users_path %>
+<% end %>  
 
 <%= form_for @book do |f| %>
   Title: <%= f.text_field :title %>
@@ -24,19 +27,22 @@
 
 <script id="book-template" type="text/x-handlebars-template">
   <div class="entry">
+
     <table>
       <tr>
         <th>Title</th>
         <th>Author</th>
         <th>Image</th>
+        <th>Add</th>
       </tr>
       {{#each this.books}}
         <tr>
-          <td class="title">{{title}}</td>
+          <td class="title"><a href="/books/{{id}}">{{title}}</a></td>
           <td class="author">{{authors}}</td>
           <td class="imgs"><img src={{img}} ></td>
+          <td><input type="button" value="Add to Favorites" class="favorite"></td>
         </tr>
       {{/each}}
-    </table>
+    </table></a>
   </div>
 </script>

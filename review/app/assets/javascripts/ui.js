@@ -2,6 +2,7 @@
 API.getAll(function(books) {
   console.log(books)
   var bookList = [];
+  var counter = 0;
   books.items.forEach(function(book) {
     var ans = {};
 
@@ -9,8 +10,10 @@ API.getAll(function(books) {
     ans.img = book.volumeInfo.imageLinks.thumbnail;
     ans.authors = book.volumeInfo.authors;
     ans.description = book.volumeInfo.description;
+    ans.id = counter;
 
     bookList.push(ans);
+    counter++;
   });
 
   var source = $('#book-template').html();
@@ -44,6 +47,12 @@ $(document).ready(function() {
       $('.main').html("");
       $('.main').append(html);
     });
+  });
+});
+
+$(document).ready(function() {
+  $('table').on('click','.book-info',function() {
+    
   });
 });
 

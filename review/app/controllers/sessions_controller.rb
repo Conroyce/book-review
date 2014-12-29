@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
     @user = User.authenticate(params[:name], params[:password])
     if @user
       flash[:notice] = "You've been logged in."
-      session[:user_id] = @user_id
+      session[:user_id] = @user.id
       redirect_to "/"
     else
       flash[:alert] = "There was a problem loggin you in."
