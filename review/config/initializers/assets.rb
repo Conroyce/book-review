@@ -9,3 +9,9 @@ Rails.application.config.assets.version = '1.0'
 
 Rails.application.config.assets.precompile += %w( books.css )
 Rails.application.config.assets.precompile += %w( books.js )
+
+Rails.application.config.assets.precompile += %w( users.css )
+Rails.application.config.assets.precompile += %w( users.js )
+
+Rails.application.config.assets.precompile += %w( sessions.css )
+Rails.application.config.assets.precompile += %w( sessions.js )

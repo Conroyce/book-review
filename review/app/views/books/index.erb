@@ -1,3 +1,7 @@
+<%= link_to "Sign In", log_in_path %>
+
+<%= link_to "Sign Up", users_path %>
+
 <%= form_for @book do |f| %>
   Title: <%= f.text_field :title %>
   Description: <%= f.text_field :description %>
@@ -8,7 +12,7 @@
   <a href="/books/<%= book.id %>"><%= book.title %></a><br>
   <%= book.description %><br>
 <% end %>
-
+<h3>Search For Books</h3>
 <div class="search-div">
   <input type="text" placeholder="Search Books" id="searchBox" name="searchBox">
   <input type="submit" value="Search" class="searchButton">

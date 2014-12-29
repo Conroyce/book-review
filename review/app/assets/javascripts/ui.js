@@ -23,6 +23,7 @@ API.getAll(function(books) {
 $(document).ready(function() {
   $('.search-div').on('click','.searchButton',function() {
     var $text = $('#searchBox').val();
+    $('#searchBox').val('');
     console.log($text);
     API.find($text,function(data) {
       console.log(data);
