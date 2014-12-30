@@ -10,7 +10,7 @@ API.getAll(function(books) {
     ans.img = book.volumeInfo.imageLinks.thumbnail;
     ans.authors = book.volumeInfo.authors;
     ans.description = book.volumeInfo.description;
-    ans.id = counter;
+    ans.id = book.id;
 
     bookList.push(ans);
     counter++;
@@ -21,6 +21,15 @@ API.getAll(function(books) {
   var html = template({books:bookList});
 
   $('.main').append(html);
+});
+
+$(document).ready(function() {
+  $('.main').on('click','.addBook',function(e) {
+    
+    var $id = $(this).children('.bookId').val();
+    var $title = $(this).children('.bookTitle').val();
+    $.post("/books", {book:{title: $title, book_id: $id} })
+  })
 });
 
 $(document).ready(function() {
@@ -50,10 +59,6 @@ $(document).ready(function() {
   });
 });
 
-$(document).ready(function() {
-  $('table').on('click','.book-info',function() {
-    
-  });
-});
+
 
 

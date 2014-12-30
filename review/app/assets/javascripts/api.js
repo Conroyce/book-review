@@ -1,6 +1,6 @@
 window.API = (function() {
   var api = "AIzaSyD1xQ8m_sQA8m2wDDP6iroUlHf2ei2ehuc";
-  var start = "https://www.googleapis.com/books/v1/volumes?q="
+  var start = "https://www.googleapis.com/books/v1/volumes"
   var allBooks = "https://www.googleapis.com/books/v1/volumes?q=search+terms";
   
 
@@ -9,9 +9,11 @@ window.API = (function() {
   };
 
   var find = function(topic,callback) {
-    $.get(start+topic+"&key="+api,callback)
+    $.get(start+"?q="+topic+"&key="+api,callback)
   };
-
+  var addBook = function(topic,callback) {
+    $.post()
+  };
 
   return {
     getAll: getAll,

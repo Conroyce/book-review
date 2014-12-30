@@ -6,7 +6,7 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.create(book_params)
-    redirect_to "/books"
+    render "index"
   end  
 
   def show
@@ -30,6 +30,6 @@ class BooksController < ApplicationController
 
   private
   def book_params
-    @book = params.require(:book).permit(:title, :description)
+    @book = params.require(:book).permit(:title, :book_id)
   end  
 end
