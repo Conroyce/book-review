@@ -25,10 +25,36 @@ API.getAll(function(books) {
 
 $(document).ready(function() {
   $('.main').on('click','.addBook',function(e) {
-    
+    e.preventDefault();
     var $id = $(this).children('.bookId').val();
     var $title = $(this).children('.bookTitle').val();
-    $.post("/books", {book:{title: $title, book_id: $id} })
+    $.post("/books", {book:{title: $title, book_id: $id} }).success(function(x) {
+      console.log(x);
+      
+      API.getAll(function(books) {
+        console.log(books)
+        var bookList = [];
+        var counter = 0;
+        books.items.forEach(function(book) {
+          var ans = {};
+
+          ans.title = book.volumeInfo.title;
+          ans.img = book.volumeInfo.imageLinks.thumbnail;
+          ans.authors = book.volumeInfo.authors;
+          ans.description = book.volumeInfo.description;
+          ans.id = book.id;
+
+          bookList.push(ans);
+          counter++;
+        });
+
+        var source = $('#book-template').html();
+        var template = Handlebars.compile(source);
+        var html = template({books:bookList});
+
+        $('.main').append(html);
+      });
+    })
   })
 });
 

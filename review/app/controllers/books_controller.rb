@@ -6,7 +6,8 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.create(book_params)
-    render "index"
+    # redirect_to "/"
+    render :json => @book  
   end  
 
   def show
@@ -30,6 +31,11 @@ class BooksController < ApplicationController
 
   private
   def book_params
-    @book = params.require(:book).permit(:title, :book_id)
+    if current_user
+      params["book"]["user_id"] = "#{session[:user_id].to_s} #{params[:description].to_s}"
+      @book = params.require(:book).permit(:title, :book_id, :user_id)
+    else   
+      @book = params.require(:book).permit(:title, :book_id)
+    end  
   end  
 end

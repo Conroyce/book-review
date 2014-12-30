@@ -11,9 +11,13 @@
   <%= f.submit("Add Book") %>
 <% end %>
 
-<% @books.each do |book| %>
-  <a href="/books/<%= book.id %>"><%= book.title %></a><br>
-<% end %>
+<% if current_user %>
+  <% current_user.books.each do |book| %>
+     <a href="/books/<%= book.id %>"><%= book.title %></a><br>
+  <% end %>
+<% else %>
+<% end %>    
+ 
 <h3>Search For Books</h3>
 <div class="search-div">
   <input type="text" placeholder="Search Books" id="searchBox" name="searchBox">
