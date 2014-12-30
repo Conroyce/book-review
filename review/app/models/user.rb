@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   before_save :encrypt_password
   has_many :books
   has_many :messages
+  has_many :user_books
 
   def encrypt_password
     self.password_salt = BCrypt::Engine.generate_salt

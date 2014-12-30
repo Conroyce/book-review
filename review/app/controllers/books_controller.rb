@@ -33,9 +33,13 @@ class BooksController < ApplicationController
   def book_params
     if current_user
       params["book"]["user_id"] = "#{session[:user_id].to_s} #{params[:description].to_s}"
-      @book = params.require(:book).permit(:title, :book_id, :user_id)
+      @book = params.require(:book).permit(:title, :book_id, user_ids:[])
     else   
       @book = params.require(:book).permit(:title, :book_id)
     end  
-  end  
+  end 
+
+  def user_book_params
+    @book = params.require(:user_book).permit(:title, :book_id, user_ids:[])
+  end 
 end
