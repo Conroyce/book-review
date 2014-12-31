@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   attr_accessor :password
   validates_confirmation_of :password
   before_save :encrypt_password
-  has_many :books
+  has_many :books, through: :user_books
   has_many :messages
   has_many :user_books
 
