@@ -40,8 +40,26 @@
   
 </div>
 <div class="col-md-4">
-</div>    
+</div>
 
+<div class="col-md-2">
+</div> 
+<div class="col-md-8">
+  <%= form_for @book do |f| %>
+    Title: <%= f.text_field :title %>
+    <%= f.submit "Add Book" %>
+  <% end %>
+
+  <% if current_user %>
+    <% current_user %>
+    <% current_user.books.each do |book| %>
+       <a href="/books/<%= book.id %>"><%= book.title %></a><br>
+    <% end %>
+  <% else %>
+  <% end %> 
+</div>  
+<div class="col-md-2">
+</div>
 <div class="container main-back">
   <div class="main">
   </div>

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root "books#index"
 
-  resources :books, param: :book_id  do 
+  resources :books do 
     resources :messages
   end  
 
