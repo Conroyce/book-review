@@ -68,12 +68,12 @@
 <script id="book-template" type="text/x-handlebars-template">
   <div class="entry">
     {{#each this.books}}
-      <div class="col-md-4">
+      <a href="/books/{{id}}"><div class="col-md-4">
         <img src={{img}}><br>
         <p class="title">{{title}}</p>
         <p class="authors">{{authors}}</p>
         <p class="{{id}}"><a href="/books" class="addBook">Add To Favorites<input type="hidden" value="{{id}}" name="{{id}}" class="bookId"><input type="hidden" value="{{title}}" name="{{title}}" class="bookTitle"></p>
-      </div>
+      </div></a>
     {{/each}}
   </div>
 </script>

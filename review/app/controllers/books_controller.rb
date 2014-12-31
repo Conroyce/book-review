@@ -11,7 +11,7 @@ class BooksController < ApplicationController
   end  
 
   def show
-    @book = Book.find(params[:id])
+    @book = Book.find_by(book_id: params[:id])
     @message = Message.new
   end  
 
