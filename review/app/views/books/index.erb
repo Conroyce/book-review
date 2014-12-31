@@ -1,50 +1,61 @@
-<% if current_user %>
-  Welcome, <%= current_user.name %>!<br>
-  <%= link_to "Sign Out", log_out_path %>
-<% else %>   
-  <%= link_to "Sign In", log_in_path %>
-  <%= link_to "Sign Up", users_path %>
-<% end %>  
-
-<%= form_for @book do |f| %>
-  Title: <%= f.text_field :title %>
-  <%= f.submit("Add Book") %>
-<% end %>
-
-<% if current_user %>
-  <% current_user.books.each do |book| %>
-     <a href="/books/<%= book.id %>"><%= book.title %></a><br>
-  <% end %>
-<% else %>
-<% end %>    
- 
-<h3>Search For Books</h3>
-<div class="search-div">
-  <input type="text" placeholder="Search Books" id="searchBox" name="searchBox">
-  <input type="submit" value="Search" class="searchButton">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a href="/books"><h1>Books</h1></a>
+   
+      
+    </div> 
+    <div id="navbar" class="navbar-collapse collapse">
+      <% if current_user %>
+        <div class="navbar-right">
+          Welcome, <%= current_user.name %>!
+          <%= link_to "Sign Out", log_out_path %>
+        </div>  
+      <% else %>   
+        <%= form_tag log_in_path, class: "navbar-form navbar-right" do %>
+          <div class="form-group">
+            <%= text_field_tag :name, nil, placeholder: "Username", class: "form-control" %>
+          </div>  
+          <div class="form-group">
+            <%= password_field_tag :password, nil, placeholder: "Password", class: "form-control" %>
+          </div>  
+            <%= submit_tag "Log in", class: "btn-success btn" %> 
+        <% end %> 
+        <%= link_to "Sign Up", users_path, class: "navbar-right" %>
+      <% end %>
+    </div>
+  </div>
+</nav>
+<div class="col-md-12 space-8">
 </div>
 
-<div class="main">
+<div class="col-md-4">
 </div>
+<div class="col-md-4 space-4-bot">
+  <h3>Search For Books</h3>
+  <div class="search-div">
+      <input type="text" placeholder="Search Books" id="searchBox" name="searchBox" class="form-control">
+      <input type="submit" value="Search" class="searchButton form-control btn-primary">
+  </div>
+  
+</div>
+<div class="col-md-4">
+</div>    
+
+<div class="container main-back">
+  <div class="main">
+  </div>
+</div>  
 
 <script id="book-template" type="text/x-handlebars-template">
   <div class="entry">
-    <table>
-      <tr>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Image</th>
-        <th>Add</th>
-      </tr>
-      {{#each this.books}}
-        <tr>
-          <td class="title"><a href="/books/{{id}}">{{title}}</a></td>
-          <td class="author">{{authors}}</td>
-          <td class="imgs"><img src={{img}}></td>
-          <td class="{{id}}"><a href="/books" class="addBook">Add To Favorites<input type="hidden" value="{{id}}" name="{{id}}" class="bookId"><input type="hidden" value="{{title}}" name="{{title}}" class="bookTitle"></td>
-
-        </tr>
-      {{/each}}
-    </table>
+    {{#each this.books}}
+      <div class="col-md-4">
+        <img src={{img}}><br>
+        <p class="title">{{title}}</p>
+        <p class="authors">{{authors}}</p>
+        <p class="{{id}}"><a href="/books" class="addBook">Add To Favorites<input type="hidden" value="{{id}}" name="{{id}}" class="bookId"><input type="hidden" value="{{title}}" name="{{title}}" class="bookTitle"></p>
+      </div>
+    {{/each}}
   </div>
 </script>

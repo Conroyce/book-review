@@ -3,3 +3,15 @@
 <%= link_to 'edit', edit_book_path(@book) %>
 
 <%= link_to "delete",[@book], method: :delete %>
+
+<%= form_tag("/books/#{@book.id}/messages", method:"post") do %>
+  <%= label_tag :message_title,:title %>
+  <%= text_field_tag :message_title, :title %>
+  <%= label_tag :message,:review %>
+  <%= text_area :message, :review, cols: 20, rows: 20 %>
+  <%= hidden_field :trees, @book.book_id %> 
+
+  <%= submit_tag("Create Review") %>
+<% end %><br>  
+
+ 

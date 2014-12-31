@@ -11,15 +11,16 @@ class BooksController < ApplicationController
   end  
 
   def show
-    @book = Book.find(params[:id])
+    @book = Book.find(params[:book_id])
+    @message = Message.new
   end  
 
   def edit
-    @book = Book.find(params[:id])
+    @book = Book.find(params[:book_id])
   end  
 
   def update
-    @book = Book.find(params[:id])
+    @book = Book.find(params[:book_id])
     @book.update(book_params)
     redirect_to "/books/#{params[:id]}"
   end 

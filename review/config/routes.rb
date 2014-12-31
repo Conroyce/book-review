@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
   root "books#index"
 
-  resources :books
+  resources :books, param: :book_id  do 
+    resources :messages
+  end  
 
-  resources :users
+  resources :users 
+
+  
 
   get "/log-in" => "sessions#new"   
 
