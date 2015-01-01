@@ -45,13 +45,8 @@
 <div class="col-md-2">
 </div> 
 <div class="col-md-8">
-  <%= form_for @book do |f| %>
-    Title: <%= f.text_field :title %>
-    <%= f.submit "Add Book" %>
-  <% end %>
 
-  <% if current_user %>
-    <% current_user %>
+  <% if current_user.books.lengh > 0 %>
     <% current_user.books.each do |book| %>
        <a href="/books/<%= book.id %>"><%= book.title %></a><br>
     <% end %>

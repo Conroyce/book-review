@@ -1,10 +1,13 @@
 class BooksController < ApplicationController
   def index
+    binding.pry
     @books = Book.all
     @book = Book.new
   end  
 
   def create
+    
+
     @book = current_user.books.create(book_params)
     # redirect_to "/"
     render :json => @book  
@@ -21,7 +24,7 @@ class BooksController < ApplicationController
 
   def update
     @book = Book.find(params[:id])
-    @book.update(book_params)
+    @book.update(users_books_params)
     redirect_to "/books/#{params[:id]}"
   end 
 
@@ -33,14 +36,15 @@ class BooksController < ApplicationController
   private
   def book_params
     if current_user
-      params["book"]["user_id"] = "#{session[:user_id].to_s} #{params[:description].to_s}"
-      @book = params.require(:book).permit(:title, :book_id, :user_id)
+      params["book"]["user_ids"] = [("#{session[:user_id].to_s}")]  #{params[:description].to_s}
+      @book = params.require(:book).permit(:title, :book_id, user_ids:[])
     else   
-      @book = params.require(:book).permit(:title, :book_id)
+      @book = params.require(:book).permit(:title ,:book_id)
     end  
   end 
 
-  def user_book_params
-    @book = params.require(:user_book).permit(:title, :book_id, :user_id)
+  def users_books_params
+    params["user_book"]["user_ids"] = [("#{session[:user_id].to_s}")]
+    @book = params.require(:users_books).permit(:title, :book_id, user_ids:[])
   end 
 end
