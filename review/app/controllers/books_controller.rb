@@ -5,15 +5,18 @@ class BooksController < ApplicationController
   end  
 
   def create
-    
-
     @book = current_user.books.create(book_params)
     # redirect_to "/"
     render :json => @book  
   end  
 
   def show
+    binding.pry
     @book = Book.find_by(book_id: params[:id])
+    if @book
+    else
+      @book = Book.create(book_params)
+    end  
     @message = Message.new
   end  
 
