@@ -15,11 +15,16 @@ class MessagesController < ApplicationController
   end
   
   def update
-    @message = Message.update(message_params)
+    @message = Message.find(params[:id])
+    @book = Book.find(@message.book_id)
+    @message.update(title: message_params["title"],review: message_params["review"])
+    redirect_to "/books/#{@book.book_id}"
   end  
 
   def destroy
-    @message = Message.delete(params[:id])
+    @message = Message.destroy(params[:id])
+    @book = Book.find(@message.book_id)
+    redirect_to "/books/#{@book.book_id}"
   end  
 
   private
@@ -27,8 +32,8 @@ class MessagesController < ApplicationController
     @book = Book.find(params[:book_id])
     params["message"]["name"] = current_user.name || "Guest"
     params["message"]["user_id"] = current_user.id || "Guest"
-    params["message"]["title"] = params["message_title"]
-    params["message"]["book_id"] = params["message_book_id"].keys[0]
+    params["message"]["title"] = params["message"]["title"] || params["title"]
+    params["message"]["book_id"] = params["book_id"] || params["message_book_id"].keys[0] 
     @message = params.require(:message).permit(:title,:review, :user_id, :book_id, :name)
   end  
 end

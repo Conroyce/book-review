@@ -1,2 +1,12 @@
 <%= @message.title %>
 <%= @message.review %>
+
+<%= form_for @message, url:book_message_path do |f| %>
+  <%= f.text_field :title %>
+  <%= f.text_field :review %>
+  <%= f.hidden_field :book_id, :value => @message.id %>
+
+  <%= f.submit %>
+<% end %>  
+
+<%= link_to "Delete", book_message_path %>
