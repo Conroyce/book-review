@@ -17,8 +17,7 @@ class BooksController < ApplicationController
       @book = Book.create(book_params)
       render :json => @book
     end  
-    # redirect_to "/"
-     
+    # redirect_to "/"  
   end  
 
   def show
@@ -44,8 +43,8 @@ class BooksController < ApplicationController
 
   private
   def book_params
-    params[:title] = Book.find_by(book_id:params[:id]).title
-    params[:book_id] = params[:id]
+    params[:title] = params[:book][:title] || Book.find_by(book_id:params[:id]).title
+    params[:book_id] = params[:id] || params[:book][:book_id]
     params[:user_id] = current_user.id.to_s
     if current_user
       # params["book"]["user_id"] = session[:user_id].to_s  #{params[:description].to_s}

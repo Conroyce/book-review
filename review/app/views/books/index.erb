@@ -47,12 +47,13 @@
 <div class="col-md-8">
   <% if current_user.try(:books) %>
     <% current_user.books.each do |book| %>
-       <a href="/books/<%= book.id %>"><%= book.title %></a><br>
+       <a href="/books/<%= book.book_id %>"><%= book.title %></a><br>
     <% end %>
   <% else %>
   <% end %> 
 </div>  
 <div class="col-md-2">
+
 </div>
 <div class="container main-back">
   <div class="main">

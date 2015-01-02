@@ -39,7 +39,7 @@ $(document).ready(function() {
           var ans = {};
 
           ans.title = book.volumeInfo.title;
-          ans.img = book.volumeInfo.imageLinks.thumbnail;
+          ans.img = book.volumeInfo.imageLinks.thumbnail || "mysterybook.jpg";
           ans.authors = book.volumeInfo.authors;
           ans.description = book.volumeInfo.description;
           ans.id = book.id;
@@ -90,7 +90,11 @@ $(document).ready(function() {
 
         ans.title = book.volumeInfo.title;
         ans.authors = book.volumeInfo.authors;
-        ans.img = book.volumeInfo.imageLinks.thumbnail
+        if (book.volumeInfo.imageLinks == undefined) {
+          ans.img = "mysterybook.jpg";
+        } else {
+          ans.img = book.volumeInfo.imageLinks.thumbnail;
+        } 
         bookList.push(ans);
       });
 
