@@ -23,7 +23,7 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find_by(book_id: params[:id])
-    @book.update(book_params["user_id"].to_i) if !@book.user_id
+    @book.update(book_id: book_params["user_id"].to_i) if !@book.user_id
 
   end  
 

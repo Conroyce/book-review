@@ -1,10 +1,9 @@
 class MessagesController < ApplicationController
   def create 
-    
     @book = Book.find(params[:book_id])
-    @message = @book.messages.create(message_params)   
+    @message = @book.messages.create(message_params)
 
-    redirect_to "books/#{@book.id}"
+    redirect_to "/books/#{@book.book_id}"   
   end  
 
   def show
