@@ -59,6 +59,25 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
+  $('.main').on('click','.show-book',function(e) {
+    var $id = $(this).children('.bookId').val();
+    var $title = $(this).children('.bookTitle').val();
+    $.post("/books", {book:{title: $title, book_id: $id}}).success(function(x) {
+      console.log(x)
+      // API.find_id($id, function(data) {
+      //   console.log(data);
+
+      //   var ans = {};
+      //   ans.title = data.title;
+      //   ans.id = data.id;
+
+      // })
+    })
+  })
+
+})
+
+$(document).ready(function() {
   $('.search-div').on('click','.searchButton',function() {
     var $text = $('#searchBox').val();
     $('#searchBox').val('');

@@ -5,13 +5,22 @@ class BooksController < ApplicationController
   end  
 
   def create
-    @book = current_user.books.create(book_params)
+    @findbook = Book.find_by(book_id: params[:book][:book_id])
+    if @findbook.try(:title)
+      @book = @findbook
+      render :json => @findbook
+    elsif current_user 
+      @book = current_user.books.create(book_params)
+      render :json => @book  
+    else
+      @book = Book.create(book_params)
+      render :json => @book
+    end  
     # redirect_to "/"
-    render :json => @book  
+     
   end  
 
   def show
-    binding.pry
     @book = Book.find_by(book_id: params[:id])
     if @book
     else

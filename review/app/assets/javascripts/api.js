@@ -11,12 +11,13 @@ window.API = (function() {
   var find = function(topic,callback) {
     $.get(start+"?q="+topic+"&key="+api,callback)
   };
-  var addBook = function(topic,callback) {
-    $.post()
-  };
+  var find_id = function(id,callback) {
+    $.get(start+"/"+id,callback)
+  }
 
   return {
     getAll: getAll,
-    find: find
+    find: find,
+    find_id: find_id
   }
 })();
