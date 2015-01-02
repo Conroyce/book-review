@@ -23,11 +23,8 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find_by(book_id: params[:id])
-    if @book
-    else
-      @book = Book.create(book_params)
-    end  
-    @message = Message.new
+    @book.update(book_params["user_id"].to_i) if !@book.user_id
+
   end  
 
   def edit
@@ -47,16 +44,19 @@ class BooksController < ApplicationController
 
   private
   def book_params
+    params[:title] = Book.find_by(book_id:params[:id]).title
+    params[:book_id] = params[:id]
+    params[:user_id] = current_user.id.to_s
     if current_user
-      params["book"]["user_ids"] = [("#{session[:user_id].to_s}")]  #{params[:description].to_s}
-      @book = params.require(:book).permit(:title, :book_id, user_ids:[])
+      # params["book"]["user_id"] = session[:user_id].to_s  #{params[:description].to_s}
+      @book = params.permit(:title, :book_id, :user_id)
     else   
-      @book = params.require(:book).permit(:title ,:book_id)
+      @book = params.permit(:title ,:book_id)
     end  
   end 
 
   def users_books_params
-    params["user_book"]["user_ids"] = [("#{session[:user_id].to_s}")]
-    @book = params.require(:user_books).permit(:title, :book_id, user_ids:[])
+    params[:user_id] = current_user.id.to_s
+    @book = params.require(:user_books).permit(:title, :book_id, :user_id)
   end 
 end

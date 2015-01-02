@@ -1,7 +1,6 @@
 class MessagesController < ApplicationController
   def create 
-    params["message"]["title"] = params["message_title"]
-    params["message"]["book_id"] = params["message_book_id"].keys[0]
+    
     @book = Book.find(params[:book_id])
     @message = @book.messages.create(message_params)   
 
@@ -27,7 +26,10 @@ class MessagesController < ApplicationController
   private
   def message_params
     @book = Book.find(params[:book_id])
-    params["message"]["user_id"] = params["message"]["user_id"] || "Guest"
-    @message = params.require(:message).permit(:title,:review, :user_id, :book_id, :message)
+    params["message"]["name"] = current_user.name || "Guest"
+    params["message"]["user_id"] = current_user.id || "Guest"
+    params["message"]["title"] = params["message_title"]
+    params["message"]["book_id"] = params["message_book_id"].keys[0]
+    @message = params.require(:message).permit(:title,:review, :user_id, :book_id, :name)
   end  
 end
