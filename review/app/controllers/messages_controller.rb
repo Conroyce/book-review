@@ -1,10 +1,9 @@
 class MessagesController < ApplicationController
-  def create
-      
+  def create 
     params["message"]["title"] = params["message_title"]
     params["message"]["book_id"] = params["message_book_id"].keys[0]
     @book = Book.find(params[:book_id])
-    @message = @book.messages.create(message_params)
+    @message = @book.messages.create(message_params)   
 
     redirect_to "books/#{@book.id}"
   end  
@@ -27,6 +26,8 @@ class MessagesController < ApplicationController
 
   private
   def message_params
+    @book = Book.find(params[:book_id])
+    params["message"]["user_id"] = params["message"]["user_id"] || "Guest"
     @message = params.require(:message).permit(:title,:review, :user_id, :book_id, :message)
   end  
 end

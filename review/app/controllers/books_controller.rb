@@ -6,12 +6,13 @@ class BooksController < ApplicationController
 
   def create
     @findbook = Book.find_by(book_id: params[:book][:book_id])
-    if @findbook.try(:title)
+    if @findbook.try(:title) && @findbook.user_ids.include?(current_user.id)
       @book = @findbook
       render :json => @findbook
-    elsif current_user 
-      @book = current_user.books.create(book_params)
-      render :json => @book  
+    elsif @findbook.try(:title)
+      @book = @findbook
+      @book.user_books.create(book_id: @findbook.id,user_id:current_user.id) 
+      render :json => @findbook 
     else
       @book = Book.create(book_params)
       render :json => @book
@@ -56,6 +57,6 @@ class BooksController < ApplicationController
 
   def users_books_params
     params["user_book"]["user_ids"] = [("#{session[:user_id].to_s}")]
-    @book = params.require(:users_books).permit(:title, :book_id, user_ids:[])
+    @book = params.require(:user_books).permit(:title, :book_id, user_ids:[])
   end 
 end
