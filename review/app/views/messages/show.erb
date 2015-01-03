@@ -1,5 +1,7 @@
+<%= @book.title %>
 <%= @message.title %>
 <%= @message.review %>
+
 
 <%= form_for @message, url:book_message_path(@message.book_id,@message.id) do |f| %>
   <%= f.text_field :title %>

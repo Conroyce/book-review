@@ -1,6 +1,16 @@
 class MessagesController < ApplicationController
   def index
     @messages = Message.where(user_id: current_user.id)
+    @book_ids = {}
+    @messages.each do |x|
+      if @book_ids[x.book_id]
+        x[:book_title] = @book_ids[x.book_id]
+      else
+        @book = Book.find(x.book_id)
+        @book_ids[x.book_id] = @book.title
+        x[:book_title] = @book.title
+      end 
+    end   
   end  
 
   def create 
@@ -12,6 +22,7 @@ class MessagesController < ApplicationController
 
   def show
     @message = Message.find(params[:id])
+
   end   
 
   def edit
@@ -36,7 +47,7 @@ class MessagesController < ApplicationController
     @book = Book.find(params[:book_id])
     params["message"]["name"] = current_user.name || "Guest"
     params["message"]["user_id"] = current_user.id || "Guest"
-    params["message"]["title"] = params["message"]["title"] || params["title"]
+    params["message"]["title"] = params["message"]["title"] || params["title"] || params["message_title"]
     params["message"]["book_id"] = params["book_id"] || params["message_book_id"].keys[0] 
     @message = params.require(:message).permit(:title,:review, :user_id, :book_id, :name)
   end  

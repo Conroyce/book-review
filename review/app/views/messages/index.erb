@@ -1,4 +1,5 @@
 <% @messages.each do |message| %>
+  Book: <a href="/users/<%= message.user_id %>/messages/<%= message.id %>"><%= message.book_title %></a><br>
   Title: <a href="/users/<%= message.user_id %>/messages/<%= message.id %>"><%= message.title %></a><br>
   Review: <a href="/users/<%= message.user_id %>/messages/<%= message.id %>"><%= message.review %></a><br>
 <% end %>  

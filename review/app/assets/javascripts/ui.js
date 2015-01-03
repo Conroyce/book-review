@@ -7,7 +7,11 @@ API.getAll(function(books) {
     var ans = {};
 
     ans.title = book.volumeInfo.title;
-    ans.img = book.volumeInfo.imageLinks.thumbnail;
+    if (book.volumeInfo.imageLinks == undefined) {
+      ans.img = "mysterybook.jpg";
+    } else {
+      ans.img = book.volumeInfo.imageLinks.thumbnail;
+    } 
     ans.authors = book.volumeInfo.authors;
     ans.description = book.volumeInfo.description;
     ans.id = book.id;
@@ -39,7 +43,11 @@ $(document).ready(function() {
           var ans = {};
 
           ans.title = book.volumeInfo.title;
-          ans.img = book.volumeInfo.imageLinks.thumbnail || "mysterybook.jpg";
+          if (book.volumeInfo.imageLinks == undefined) {
+            ans.img = "mysterybook.jpg";
+          } else {
+            ans.img = book.volumeInfo.imageLinks.thumbnail;
+          } 
           ans.authors = book.volumeInfo.authors;
           ans.description = book.volumeInfo.description;
           ans.id = book.id;
