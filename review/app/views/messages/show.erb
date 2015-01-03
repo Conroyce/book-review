@@ -1,7 +1,7 @@
 <%= @message.title %>
 <%= @message.review %>
 
-<%= form_for @message, url:book_message_path do |f| %>
+<%= form_for @message, url:book_message_path(@message.book_id,@message.id) do |f| %>
   <%= f.text_field :title %>
   <%= f.text_field :review %>
   <%= f.hidden_field :book_id, :value => @message.id %>
@@ -9,4 +9,4 @@
   <%= f.submit %>
 <% end %>  
 
-<%= link_to "Delete", book_message_path, method: :delete %>
+<%= link_to "Delete", book_message_path(@message.book_id,@message.id), method: :delete %>
