@@ -40,6 +40,9 @@
   
 </div>
 <div class="col-md-4">
+  <% if current_user %>
+       <%= link_to "My Reviews", user_messages_path(current_user.id) %>
+     <% end %> 
 </div>
 
 <div class="col-md-2">

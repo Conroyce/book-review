@@ -5,9 +5,9 @@ Rails.application.routes.draw do
     resources :messages
   end  
 
-  resources :users 
-
-  
+  resources :users do 
+    resources :messages
+  end  
 
   get "/log-in" => "sessions#new"   
 

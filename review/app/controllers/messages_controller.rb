@@ -1,4 +1,8 @@
 class MessagesController < ApplicationController
+  def index
+    @messages = Message.where(user_id: current_user.id)
+  end  
+
   def create 
     @book = Book.find(params[:book_id])
     @message = @book.messages.create(message_params)

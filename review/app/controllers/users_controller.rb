@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   def index
-    redirect_to "/users/new"
+    if current_user
+      
+    else
+      redirect_to "/users/new"
+    end    
   end   
 
   def create
