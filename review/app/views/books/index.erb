@@ -48,12 +48,7 @@
 <div class="col-md-2">
 </div> 
 <div class="col-md-8">
-  <% if current_user.try(:books) %>
-    <% current_user.books.each do |book| %>
-       <a href="/books/<%= book.book_id %>"><%= book.title %></a><br>
-    <% end %>
-  <% else %>
-  <% end %> 
+  
 </div>  
 <div class="col-md-2">
 
@@ -66,12 +61,16 @@
 <script id="book-template" type="text/x-handlebars-template">
   <div class="entry">
     {{#each this.books}}
-      <a href="/books/{{id}}" class="show-book"><div class="col-md-4 even-div">
-        <img src={{img}}><br>
-        <p class="title">{{title}}</p>
-        <p class="authors">{{authors}}</p>
-        <input type="hidden" value="{{id}}" name="{{id}}" class="bookId"><input type="hidden" value="{{title}}" name="{{title}}" class="bookTitle"></a>
-        <p class="{{id}}"><a href="/books" class="addBook">Add To Favorites<input type="hidden" value="{{id}}" name="{{id}}" class="bookId"><input type="hidden" value="{{title}}" name="{{title}}" class="bookTitle"></a></p>
+      <div class="col-md-2 even-div">
+        <a href="/books/{{id}}" class="show-book"><div class="overlay-wrapper">
+          <span class="focus-overlay"></span><img src={{img}} height="200" width="150"><br>
+        </div></a>  
+        <div class="book-info">
+          <a href="/books/{{id}}" class="show-book"><p class="title">{{title}}</p></a>
+          <a href="/books/{{id}}" class="show-book"><p class="authors">{{authors}}</p></a>
+          <input type="hidden" value="{{id}}" name="{{id}}" class="bookId"><input type="hidden" value="{{title}}" name="{{title}}" class="bookTitle"></a>
+          <p class="{{id}} addBook"><a href="/books" class="addBook">Add To Favorites<input type="hidden" value="{{id}}" name="{{id}}" class="bookId"><input type="hidden" value="{{title}}" name="{{title}}" class="bookTitle"></a></p>
+        </div>  
       </div>
     {{/each}}
   </div>

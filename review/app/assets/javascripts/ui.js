@@ -6,7 +6,14 @@ API.getAll(function(books) {
   books.items.forEach(function(book) {
     var ans = {};
 
-    ans.title = book.volumeInfo.title;
+    var checkTitle = book.volumeInfo.title.split("");
+    console.log(checkTitle); 
+    if (checkTitle.length > 28) {
+      ans.title = checkTitle.join("").substr(0,28)+"...";
+    } else {
+      ans.title = book.volumeInfo.title;
+    }
+    
     if (book.volumeInfo.imageLinks == undefined) {
       ans.img = "mysterybook.jpg";
     } else {

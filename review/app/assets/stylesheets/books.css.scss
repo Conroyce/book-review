@@ -15,5 +15,60 @@
   color:white;
 }
 .even-div {
-  height:340px;
+  height:400px;
 }
+
+.focus-overlay {
+  z-index:1000;
+  position:absolute;
+  width:150px;
+  height:200px;
+  transition: 400ms;
+}
+.overlay-wrapper {
+  width:160px;
+}
+.focus-overlay:hover {
+  opacity:.3;
+  background-color:black;
+  transition: 400ms;
+}
+.book-info {
+  width:150px;
+  background-color:white;
+  box-sizing:border-box;
+  padding:5px;
+  color:#333;
+  height:100px;
+  box-shadow: 3px 3px 3px rgba(0,0,0,0.1);
+}
+.book-info p {
+  margin:5px;
+  line-height: 110%;
+  color:#444;
+}
+.book-info .authors {
+  font-size:0.8em;
+  color:#777;
+}
+.book-info .title {
+  margin-bottom: -2px;
+  font-size:1.1em;
+}
+a.addBook {
+  font-size: 0.8em;
+}
+.even-div img {
+  box-shadow: 2px 2px 3px rba(0,0,0,0.1);
+}
+
+
+
+
+
+
+
+
+
+
+
