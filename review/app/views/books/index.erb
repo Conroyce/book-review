@@ -2,30 +2,29 @@
 <div class="col-md-12 space-8">
 </div>
 
-<div class="col-md-4">
-</div>
-<div class="col-md-4 space-4-bot">
-  <h3 class="centered">Search For Books</h3>
-  <div class="search-div">
-      <input type="text" placeholder="Search Books" id="searchBox" name="searchBox" class="form-control">
-      <input type="submit" value="Search" class="searchButton form-control btn-primary">
+<div class="row">
+  <div class="col-md-4">
   </div>
-  
-</div>
-<div class="col-md-4">
-  <% if current_user %>
-       <%= link_to "My Reviews", user_messages_path(current_user.id) %>
-     <% end %> 
+  <div class="col-md-4 space-4-bot">
+    <h3 class="centered">Search For Books</h3>
+    <div class="search-div">
+        <input type="text" placeholder="Search Books" id="searchBox" name="searchBox" class="form-control">
+        <input type="submit" value="Search" class="searchButton form-control btn-primary">
+    </div>
+    
+  </div>
+  <div class="col-md-1">
+    <input type="hidden">
+  </div>
+  <div class="col-md-3">
+    <% if current_user %>
+        <%= link_to "My Reviews", user_messages_path(current_user.id) %>
+    <% else %>
+        <p>Not a Member? <%= link_to "Sign Up", users_path %>     
+    <% end %> 
+  </div>
 </div>
 
-<div class="col-md-2">
-</div> 
-<div class="col-md-8">
-  
-</div>  
-<div class="col-md-2">
-
-</div>
 <div class="container main-back">
   <div class="main">
   </div>
