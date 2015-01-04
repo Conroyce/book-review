@@ -1,13 +1,11 @@
 
 API.getAll(function(books) {
-  console.log(books)
   var bookList = [];
   var counter = 0;
   books.items.forEach(function(book) {
     var ans = {};
 
     var checkTitle = book.volumeInfo.title.split("");
-    console.log(checkTitle); 
     if (checkTitle.length > 28) {
       ans.title = checkTitle.join("").substr(0,28)+"...";
     } else {
@@ -15,7 +13,7 @@ API.getAll(function(books) {
     }
     
     if (book.volumeInfo.imageLinks == undefined) {
-      ans.img = "mysterybook.jpg";
+      ans.img = "/mysterybook.jpg";
     } else {
       ans.img = book.volumeInfo.imageLinks.thumbnail;
     } 
@@ -40,7 +38,6 @@ $(document).ready(function() {
     var $id = $(this).children('.bookId').val();
     var $title = $(this).children('.bookTitle').val();
     $.post("/books", {book:{title: $title, book_id: $id} }).success(function(x) {
-      console.log(x);
       
       API.getAll(function(books) {
         console.log(books)
@@ -49,9 +46,14 @@ $(document).ready(function() {
         books.items.forEach(function(book) {
           var ans = {};
 
-          ans.title = book.volumeInfo.title;
+          var checkTitle = book.volumeInfo.title.split("");
+          if (checkTitle.length > 28) {
+            ans.title = checkTitle.join("").substr(0,28)+"...";
+          } else {
+            ans.title = book.volumeInfo.title;
+          }
           if (book.volumeInfo.imageLinks == undefined) {
-            ans.img = "mysterybook.jpg";
+            ans.img = "/mysterybook.jpg";
           } else {
             ans.img = book.volumeInfo.imageLinks.thumbnail;
           } 
@@ -103,10 +105,15 @@ $(document).ready(function() {
       data.items.forEach(function(book) {
         var ans = {};
 
-        ans.title = book.volumeInfo.title;
+        var checkTitle = book.volumeInfo.title.split("");
+        if (checkTitle.length > 28) {
+          ans.title = checkTitle.join("").substr(0,28)+"...";
+        } else {
+          ans.title = book.volumeInfo.title;
+        }
         ans.authors = book.volumeInfo.authors;
         if (book.volumeInfo.imageLinks == undefined) {
-          ans.img = "mysterybook.jpg";
+          ans.img = "/mysterybook.jpg";
         } else {
           ans.img = book.volumeInfo.imageLinks.thumbnail;
         } 

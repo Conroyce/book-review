@@ -1,33 +1,49 @@
-<h2><%= @book.title %></h2>
+<div class="space-8 container book-show">
+  <div class="col-md-12">
+    <h2><%= @book.title %></h2>
+  </div>  
 
+<div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6">
+      <% if current_user %>
+        <a href="/books/<%= @book.id %>/edit"><%= @book.title %></a>
 
-<% if current_user %>
-  <a href="/books/<%= @book.id %>/edit"><%= @book.title %></a>
+        <%= link_to 'edit', edit_book_path(@book) %>
 
-  <%= link_to 'edit', edit_book_path(@book) %>
+        <%= link_to "delete",[@book], method: :delete %>
 
-  <%= link_to "delete",[@book], method: :delete %>
+        <%= form_tag("/books/#{@book.id}/messages", method:"post") do %>
+          <%= text_field_tag :message_title, :title, value: "", placeholder:"Review Title", class:'form-control' %>
+          <%= text_area :message, :review, placeholder:"Enter Review...",class:'form-control' %>
+          <%= hidden_field :message_book_id, @book.book_id %> 
+          <%= hidden_field :message_user_id, @book.user_id %>
 
-  <%= form_tag("/books/#{@book.id}/messages", method:"post") do %>
-    <%= label_tag :message_title,:title %>
-    <%= text_field_tag :message_title, :title %>
-    <%= label_tag :message,:review %>
-    <%= text_area :message, :review, cols: 20, rows: 20 %>
-    <%= hidden_field :message_book_id, @book.book_id %> 
-    <%= hidden_field :message_user_id, @book.user_id %>
+          <%= submit_tag("Create Review",class:"form-control btn-primary") %>
+        <% end %><br>  
+      <% else %>
+      <% end %> 
+    </div> 
+    <div class="col-md-3">
+    </div> 
+</div>
 
-    <%= submit_tag("Create Review") %>
-  <% end %><br>  
-<% else %>
-<% end %> 
-
-<h2>Reviews</h2>
-<% if @book.try(:messages) %>
-  <% @book.messages.each do |message| %>
-    User: <a href="/books/<%= @book.id %>/messages/<%= message.id %>"><%= message.name %></a><br>
-    Title: <a href="/books/<%= @book.id %>/messages/<%= message.id %>"><%= message.title %></a><br>
-    Review: <a href="/books/<%= @book.id %>/messages/<%= message.id %>"><%= message.review %></a><br>
-  <% end %>  
-<% else %>
-<% end %> 
-
+<div class="row">    
+  <div class="col-md-3">
+  </div>  
+  <div class="col-md-6">  
+    <h2>Reviews</h2>
+    <% if @book.try(:messages) %>
+      <% @book.messages.each do |message| %>
+        User: <a href="/books/<%= @book.id %>/messages/<%= message.id %>"><%= message.name %></a><br>
+        Title: <a href="/books/<%= @book.id %>/messages/<%= message.id %>"><%= message.title %></a><br>
+        Review: <a href="/books/<%= @book.id %>/messages/<%= message.id %>"><%= message.review %></a><br>
+      <% end %>  
+    <% else %>
+    <% end %> 
+  </div>
+  <div class="col-md-3">
+  </div>  
+</div>  
+</div>

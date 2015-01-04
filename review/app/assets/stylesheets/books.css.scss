@@ -61,8 +61,19 @@ a.addBook {
 .even-div img {
   box-shadow: 2px 2px 3px rba(0,0,0,0.1);
 }
-
-
+.centered {
+  text-align:center;
+}
+.book-show h2 {
+  text-align:center;
+}
+.book-show .col-md-6 {
+  margin:0 auto;
+  background-color:#eee;
+  box-sizing:border-box;  
+  padding:20px;
+  border-radius:3px;
+}
 
 
 
