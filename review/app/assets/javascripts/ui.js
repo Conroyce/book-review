@@ -7,8 +7,10 @@ API.getAll(function(books) {
 
     var checkTitle = book.volumeInfo.title.split("");
     if (checkTitle.length > 28) {
-      ans.title = checkTitle.join("").substr(0,28)+"...";
+      ans.dispTitle = checkTitle.join("").substr(0,28)+"...";
+      ans.title = book.volumeInfo.title;
     } else {
+      ans.dispTitle = book.volumeInfo.title;
       ans.title = book.volumeInfo.title;
     }
     
@@ -48,8 +50,10 @@ $(document).ready(function() {
 
           var checkTitle = book.volumeInfo.title.split("");
           if (checkTitle.length > 28) {
-            ans.title = checkTitle.join("").substr(0,28)+"...";
+            ans.dispTitle = checkTitle.join("").substr(0,28)+"...";
+            ans.title = book.volumeInfo.title;
           } else {
+            ans.dispTitle = book.volumeInfo.title;
             ans.title = book.volumeInfo.title;
           }
           if (book.volumeInfo.imageLinks == undefined) {
@@ -107,8 +111,10 @@ $(document).ready(function() {
 
         var checkTitle = book.volumeInfo.title.split("");
         if (checkTitle.length > 28) {
-          ans.title = checkTitle.join("").substr(0,28)+"...";
+          ans.dispTitle = checkTitle.join("").substr(0,28)+"...";
+          ans.title = book.volumeInfo.title;
         } else {
+          ans.dispTitle = book.volumeInfo.title;
           ans.title = book.volumeInfo.title;
         }
         ans.authors = book.volumeInfo.authors;

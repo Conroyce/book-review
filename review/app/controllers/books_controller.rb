@@ -6,12 +6,12 @@ class BooksController < ApplicationController
 
   def create
     @findbook = Book.find_by(book_id: params[:book][:book_id])
-    if @findbook.try(:title) && @findbook.user_ids.include?(current_user.id)
+    if @findbook.try(:title) && @findbook.user_ids.include?(current_user.try(:id))
       @book = @findbook
       render :json => @findbook
     elsif @findbook.try(:title)
       @book = @findbook
-      @book.user_books.create(book_id: @findbook.id,user_id:current_user.id) 
+      @book.user_books.create(book_id: @findbook.id,user_id:current_user.try(:id)) 
       render :json => @findbook 
     else
       @book = Book.create(book_params)
@@ -20,9 +20,11 @@ class BooksController < ApplicationController
     # redirect_to "/"  
   end  
 
-  def show
+  def show 
     @book = Book.find_by(book_id: params[:id])
-    @book.update(book_id: book_params["user_id"].to_i) if !@book.user_id
+    if @book && @book.user_id
+      @book.update(book_id: book_params["user_id"].to_i)
+    end
 
   end  
 
@@ -43,11 +45,16 @@ class BooksController < ApplicationController
 
   private
   def book_params
-    params[:title] = params[:book][:title] || Book.find_by(book_id:params[:id]).title
+   
+    if Book.find_by(book_id:params[:id]).try(:title)
+      params[:title] = Book.find_by(book_id:params[:id]).title
+    else 
+      params[:title] = params[:book][:title]  
+    end
     params[:book_id] = params[:id] || params[:book][:book_id]
-    params[:user_id] = current_user.id.to_s
     if current_user
       # params["book"]["user_id"] = session[:user_id].to_s  #{params[:description].to_s}
+      params[:user_id] = current_user.id.to_s
       @book = params.permit(:title, :book_id, :user_id)
     else   
       @book = params.permit(:title ,:book_id)
