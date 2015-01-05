@@ -93,7 +93,7 @@ $(document).ready(function() {
       //   ans.id = data.id;
 
       // })
-    })
+    });
   })
 
 })
@@ -123,6 +123,7 @@ $(document).ready(function() {
         } else {
           ans.img = book.volumeInfo.imageLinks.thumbnail;
         } 
+        ans.id = book.id;
         bookList.push(ans);
       });
 

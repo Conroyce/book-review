@@ -1,0 +1,20 @@
+
+[1mFrom:[0m /home/vagrant/code/mks/book-review/review/app/controllers/books_controller.rb @ line 9 BooksController#create:
+
+     [1;34m7[0m: [32mdef[0m [1;34mcreate[0m
+     [1;34m8[0m:   binding.pry
+ =>  [1;34m9[0m:   @findbook = [1;34;4mBook[0m.find_by([35mbook_id[0m: params[[33m:book[0m][[33m:book_id[0m])
+    [1;34m10[0m:   [32mif[0m @findbook.try([33m:title[0m) && @findbook.user_ids.include?(current_user.try([33m:id[0m))
+    [1;34m11[0m:     @book = @findbook
+    [1;34m12[0m:     render [33m:json[0m => @findbook
+    [1;34m13[0m:   [32melsif[0m @findbook.try([33m:title[0m)
+    [1;34m14[0m:     @book = @findbook
+    [1;34m15[0m:     @book.user_books.create([35mbook_id[0m: @findbook.id,[35muser_id[0m:current_user.try([33m:id[0m)) 
+    [1;34m16[0m:     render [33m:json[0m => @findbook 
+    [1;34m17[0m:   [32melse[0m
+    [1;34m18[0m:     @book = [1;34;4mBook[0m.create(book_params)
+    [1;34m19[0m:     render [33m:json[0m => @book
+    [1;34m20[0m:   [32mend[0m  
+    [1;34m21[0m:   [1;34m# redirect_to "/"  [0m
+    [1;34m22[0m: [32mend[0m  
+

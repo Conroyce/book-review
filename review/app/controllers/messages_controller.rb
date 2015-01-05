@@ -22,7 +22,7 @@ class MessagesController < ApplicationController
 
   def show
     @message = Message.find(params[:id])
-
+    @book = Book.find(@message.book_id)
   end   
 
   def edit

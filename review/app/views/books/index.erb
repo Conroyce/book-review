@@ -35,7 +35,8 @@
     {{#each this.books}}
       <div class="col-md-2 even-div">
         <a href="/books/{{id}}" class="show-book"><div class="overlay-wrapper">
-          <span class="focus-overlay"></span><img src={{img}} height="200" width="150"><input type="hidden" value="{{id}}" name="{{id}}" class="bookId"><input type="hidden" value="{{title}}" name="{{title}}" class="bookTitle"><br>
+          <span class="focus-overlay"></span>
+          <img src={{img}} height="200" width="150"><input type="hidden" value="{{id}}" name="{{id}}" class="bookId"><input type="hidden" value="{{title}}" name="{{title}}" class="bookTitle"><br>
         </div></a>  
         <div class="book-info">
           <a href="/books/{{id}}" class="show-book"><p class="title">{{dispTitle}}</p><input type="hidden" value="{{id}}" name="{{id}}" class="bookId"><input type="hidden" value="{{title}}" name="{{title}}" class="bookTitle"></a>

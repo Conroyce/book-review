@@ -22,10 +22,7 @@ class BooksController < ApplicationController
 
   def show 
     @book = Book.find_by(book_id: params[:id])
-    if @book && @book.user_id
-      @book.update(book_id: book_params["user_id"].to_i)
-    end
-
+    
   end  
 
   def edit
@@ -45,7 +42,6 @@ class BooksController < ApplicationController
 
   private
   def book_params
-   
     if Book.find_by(book_id:params[:id]).try(:title)
       params[:title] = Book.find_by(book_id:params[:id]).title
     else 

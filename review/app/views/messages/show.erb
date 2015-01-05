@@ -1,16 +1,32 @@
 <div class="space-8 container">
-  <%= @book.title %>
-  <%= @message.title %>
-  <%= @message.review %>
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6">
+      <h2><%= @book.title %></h2><br>
+      
 
 
-  <%= form_for @message, url:book_message_path(@message.book_id,@message.id) do |f| %>
-    <%= f.text_field :title %>
-    <%= f.text_field :review %>
-    <%= f.hidden_field :book_id, :value => @message.id %>
+      <%= form_for @message, url:book_message_path(@message.book_id,@message.id) do |f| %>
+        <%= f.text_field :title, class:"form-control" %>
+        <%= f.text_field :review, class:"form-control" %>
+        <%= f.hidden_field :book_id, :value => @message.id %>
 
-    <%= f.submit %>
-  <% end %>  
+        <%= f.submit 'Edit Message',class:"btn-primary form-control" %>
+      <% end %>  
 
-  <%= link_to "Delete", book_message_path(@message.book_id,@message.id), method: :delete %>
+      
+    </div>
+    <div class="col-md-3">
+    </div>  
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+    </div>
+    <div class="col-md-2 space-2-top">
+      <%= link_to "Delete", book_message_path(@message.book_id,@message.id), method: :delete,class:"btn-danger btn centered" %>
+    </div>
+    <div class="col-md-5">
+    </div>
+  </div>  
 </div>

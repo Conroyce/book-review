@@ -1,7 +1,21 @@
 <div class="space-8 container">
-  <% @messages.each do |message| %>
-    Book: <a href="/users/<%= message.user_id %>/messages/<%= message.id %>"><%= message.book_title %></a><br>
-    Title: <a href="/users/<%= message.user_id %>/messages/<%= message.id %>"><%= message.title %></a><br>
-    Review: <a href="/users/<%= message.user_id %>/messages/<%= message.id %>"><%= message.review %></a><br>
-  <% end %>  
+  <div class="row">
+    <div class="col-md-12">
+      <h2>My Reviews</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6 grey-back">
+      <% @messages.each do |message| %>
+        Book: <a href="/users/<%= message.user_id %>/messages/<%= message.id %>"><%= message.book_title %></a><br>
+        Title: <a href="/users/<%= message.user_id %>/messages/<%= message.id %>"><%= message.title %></a><br>
+        Review: <a href="/users/<%= message.user_id %>/messages/<%= message.id %>"><%= message.review %></a><br>
+      <% end %> 
+    </div>
+    <div class="col-md-3">
+    </div>
+  </div>    
 </div>  
+ 

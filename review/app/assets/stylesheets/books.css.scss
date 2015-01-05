@@ -37,6 +37,9 @@ h2 {
   padding-top:50px;
   margin-top:20px;
 }
+.grey-back {
+  background-color: #eee;
+}
 #navbar {
   color:white;
 }
@@ -100,7 +103,23 @@ a.addBook {
   padding:20px;
   border-radius:3px;
 }
-
+.grey-back {
+  border-radius:4px;
+  padding:20px;
+  margin-top:15px;
+}
+.white-back {
+  background-color:white;
+  border-radius:5px;
+  padding:10px;
+  padding-top:20px;
+}
+.border-grey {
+  background-color:white;
+  padding:15px;
+  border-radius:5px;
+  border:1px solid #ddd;
+}
 
 
 
