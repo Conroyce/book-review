@@ -79,10 +79,15 @@ $(document).ready(function() {
   })
 });
 
+var exec = function(func, context) {
+      func.call(context);
+}
 $(document).ready(function() {
   $('.main').on('click','.show-book',function(e) {
-    var $id = $(this).children('.bookId').val();
-    var $title = $(this).children('.bookTitle').val();
+    var $this = this;
+    var $id = $($this).children().children('input.bookId').val();
+    var $title = $($this).children().children('input.bookTitle').val();
+
     $.post("/books", {book:{title: $title, book_id: $id}}).success(function(x) {
       console.log(x)
       // API.find_id($id, function(data) {
