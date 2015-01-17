@@ -1,38 +1,42 @@
 
-API.getAll(function(books) {
-  var bookList = [];
-  var counter = 0;
-  books.items.forEach(function(book) {
-    var ans = {};
+var getBooks = function() {
+  API.getAll(function(books) {
+    var bookList = [];
+    var counter = 0;
+    books.items.forEach(function(book) {
+      var ans = {};
 
-    var checkTitle = book.volumeInfo.title.split("");
-    if (checkTitle.length > 28) {
-      ans.dispTitle = checkTitle.join("").substr(0,28)+"...";
-      ans.title = book.volumeInfo.title;
-    } else {
-      ans.dispTitle = book.volumeInfo.title;
-      ans.title = book.volumeInfo.title;
-    }
-    
-    if (book.volumeInfo.imageLinks == undefined) {
-      ans.img = "/mysterybook.jpg";
-    } else {
-      ans.img = book.volumeInfo.imageLinks.thumbnail;
-    } 
-    ans.authors = book.volumeInfo.authors;
-    ans.description = book.volumeInfo.description;
-    ans.id = book.id;
+      var checkTitle = book.volumeInfo.title.split("");
+      if (checkTitle.length > 28) {
+        ans.dispTitle = checkTitle.join("").substr(0,28)+"...";
+        ans.title = book.volumeInfo.title;
+      } else {
+        ans.dispTitle = book.volumeInfo.title;
+        ans.title = book.volumeInfo.title;
+      }
+      
+      if (book.volumeInfo.imageLinks == undefined) {
+        ans.img = "/mysterybook.jpg";
+      } else {
+        ans.img = book.volumeInfo.imageLinks.thumbnail;
+      } 
+      ans.authors = book.volumeInfo.authors;
+      ans.description = book.volumeInfo.description;
+      ans.id = book.id;
 
-    bookList.push(ans);
-    counter++;
+      bookList.push(ans);
+      counter++;
+    });
+
+    var source = $('#book-template').html();
+    var template = Handlebars.compile(source);
+    var html = template({books:bookList});
+
+    $('.main').append(html);
   });
+};
+getBooks();
 
-  var source = $('#book-template').html();
-  var template = Handlebars.compile(source);
-  var html = template({books:bookList});
-
-  $('.main').append(html);
-});
 
 $(document).ready(function() {
   $('.main').on('click','.addBook',function(e) {
@@ -41,40 +45,41 @@ $(document).ready(function() {
     var $title = $(this).children('.bookTitle').val();
     $.post("/books", {book:{title: $title, book_id: $id} }).success(function(x) {
       
-      API.getAll(function(books) {
-        console.log(books)
-        var bookList = [];
-        var counter = 0;
-        books.items.forEach(function(book) {
-          var ans = {};
+      getBooks();
+      // API.getAll(function(books) {
+      //   console.log(books)
+      //   var bookList = [];
+      //   var counter = 0;
+      //   books.items.forEach(function(book) {
+      //     var ans = {};
 
-          var checkTitle = book.volumeInfo.title.split("");
-          if (checkTitle.length > 28) {
-            ans.dispTitle = checkTitle.join("").substr(0,28)+"...";
-            ans.title = book.volumeInfo.title;
-          } else {
-            ans.dispTitle = book.volumeInfo.title;
-            ans.title = book.volumeInfo.title;
-          }
-          if (book.volumeInfo.imageLinks == undefined) {
-            ans.img = "/mysterybook.jpg";
-          } else {
-            ans.img = book.volumeInfo.imageLinks.thumbnail;
-          } 
-          ans.authors = book.volumeInfo.authors;
-          ans.description = book.volumeInfo.description;
-          ans.id = book.id;
+      //     var checkTitle = book.volumeInfo.title.split("");
+      //     if (checkTitle.length > 28) {
+      //       ans.dispTitle = checkTitle.join("").substr(0,28)+"...";
+      //       ans.title = book.volumeInfo.title;
+      //     } else {
+      //       ans.dispTitle = book.volumeInfo.title;
+      //       ans.title = book.volumeInfo.title;
+      //     }
+      //     if (book.volumeInfo.imageLinks == undefined) {
+      //       ans.img = "/mysterybook.jpg";
+      //     } else {
+      //       ans.img = book.volumeInfo.imageLinks.thumbnail;
+      //     } 
+      //     ans.authors = book.volumeInfo.authors;
+      //     ans.description = book.volumeInfo.description;
+      //     ans.id = book.id;
 
-          bookList.push(ans);
-          counter++;
-        });
+      //     bookList.push(ans);
+      //     counter++;
+      //   });
 
-        var source = $('#book-template').html();
-        var template = Handlebars.compile(source);
-        var html = template({books:bookList});
+      //   var source = $('#book-template').html();
+      //   var template = Handlebars.compile(source);
+      //   var html = template({books:bookList});
 
-        $('.main').append(html);
-      });
+      //   $('.main').append(html);
+      // });
     })
   })
 });

@@ -14,6 +14,9 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require handlebars
+//= require angular
+//= require angular-resource
+//= require anular-route
 //= require api
 //= require ui
 //= require main

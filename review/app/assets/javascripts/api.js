@@ -1,7 +1,7 @@
 window.API = (function() {
   var api = "AIzaSyD1xQ8m_sQA8m2wDDP6iroUlHf2ei2ehuc";
   var start = "https://www.googleapis.com/books/v1/volumes"
-  var allBooks = "https://www.googleapis.com/books/v1/volumes?q=search+terms&maxResults=18";
+  var allBooks = "https://www.googleapis.com/books/v1/volumes?q=Fiction&maxResults=18";
   
 
   var getAll = function(callback) {
