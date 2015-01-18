@@ -1,5 +1,18 @@
 <div ng-controller="BookCtrl">
   <div ng-repeat="book in data.items">
-    <p>Books: {{book.volumeInfo.title}}</p>  
-  </div>             
+    <div class="col-md-2 even-div">
+        <a href="/books/{{id}}" class="show-book"><div class="overlay-wrapper">
+          <span class="focus-overlay"></span>
+          <img src={{book.volumeInfo.imageLinks.thumbnail}} height="200" width="150"><input type="hidden" value="{{id}}" name="{{id}}" class="bookId"><input type="hidden" value="{{title}}" name="{{title}}" class="bookTitle"><br>
+        </div></a>  
+        <div class="book-info">
+          <a href="/books/{{id}}" class="show-book"><p class="title">{{book.volumeInfo.title}}</p><input type="hidden" value="{{id}}" name="{{id}}" class="bookId"><input type="hidden" value="{{title}}" name="{{title}}" class="bookTitle"></a>
+          <a href="/books/{{id}}" class="show-book">
+          <div ng-repeat="author in book.volumeInfo.authors">
+            <p class="authors">{{author}}</p>
+          </div>
+            <input type="hidden" value="{{id}}" name="{{id}}" class="bookId"><input type="hidden" value="{{title}}" name="{{title}}" class="bookTitle"></a>
+          <p class="{{id}} addBook"><a href="/books" class="addBook">Add To Favorites<input type="hidden" value="{{id}}" name="{{id}}" class="bookId"><input type="hidden" value="{{title}}" name="{{title}}" class="bookTitle"></a></p>
+        </div>  
+    </div>            
 </div>

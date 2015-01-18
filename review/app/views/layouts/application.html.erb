@@ -9,35 +9,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body ng-app="bookReview">
-
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <a href="/books" class="get-books"><h1>Read It?</h1></a> 
-    </div> 
-    <div id="navbar" class="navbar-collapse collapse">
-      <% if current_user %>
-        <div class="navbar-right">
-          <span class="space-right pad-2-top">Welcome, <%= current_user.name %>!</span>
-          <%= link_to "Sign Out", log_out_path, class:"btn-success btn space-1-top" %>
-        </div>  
-      <% else %>   
-        <%= form_tag log_in_path, class: "navbar-form navbar-right" do %>
-          <div class="form-group">
-            <%= text_field_tag :name, nil, placeholder: "Username", class: "form-control" %>
-          </div>  
-          <div class="form-group">
-            <%= password_field_tag :password, nil, placeholder: "Password", class: "form-control" %>
-          </div>  
-            <%= submit_tag "Log in", class: "btn-success btn" %> 
-        <% end %> 
-      <% end %>
-    </div>
-  </div>
-</nav>
-
+<div ng-include="'<%= asset_path('templates/nav_template.html') %>'"></div>
   
 <%= yield %>
+
 <div class="container main-back">
   <div class="main">
     <ng-view></ng-view>
