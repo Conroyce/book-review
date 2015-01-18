@@ -11,6 +11,7 @@ $http({method: $scope.method, url: $scope.url}).
   success(function(data,status) {
     $scope.status = status;
     $scope.data = data;
+    console.log($scope.data);
 });
 
 }])

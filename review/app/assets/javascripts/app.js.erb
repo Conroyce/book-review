@@ -1,0 +1,14 @@
+var app = angular.module("bookReview",["ngRoute","ngResource"]);
+
+app.config(function($routeProvider) {
+  $routeProvider
+  .when("/",{
+    templateUrl: "<%= asset_path('templates/book_template.html') %>",
+    controller: "BookCtrl"
+  }).
+  otherwise({
+    redirectTo: "/"
+  });
+
+})
+
