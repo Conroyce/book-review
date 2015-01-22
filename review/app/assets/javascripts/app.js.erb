@@ -3,8 +3,12 @@ var app = angular.module("bookReview",["ngRoute","ngResource"]);
 app.config(function($routeProvider) {
   $routeProvider
   .when("/",{
-    templateUrl: "<%= asset_path('templates/book_template.html') %>",
+    templateUrl: "<%= asset_path('templates/books_template.html') %>",
     controller: "BookCtrl"
+  }).
+  when("/:id",{
+    templateUrl: "<%= asset_path('templates/book_template.html') %>",
+    controller: "ShowCtrl"
   }).
   otherwise({
     redirectTo: "/"
