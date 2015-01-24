@@ -7,15 +7,15 @@
       <div class="col-md-6">
         <h2>{{book.volumeInfo.title}}</h2><br>
         
-        <form method="post">
-          <input type="input" placeholder="Review Title" class="form-control">
-          <input type="textarea" placeholder="Enter Review" class="form-control">
-          <input type="hidden" name="message_user_id[{{book.id}}]">
-          <input type="submit" value="Edit Message" class="btn-primary form-control">
+        <form>
+          <input type="input" placeholder="Review Title" class="form-control" ng-model="reviewTitle">
+          <input type="textarea" placeholder="Enter Review" class="form-control" ng-model="review">
+          <input type="hidden" name="message_user_id[{{book.id}}]" ng-model="book_id=book.id">
+          <input type="submit" value="Edit Message" class="btn-primary form-control" ng-click="createMessage()">
         </form>  
         
       </div>
-
+      <p>title: {{reviewTitle}}, review: {{review}}, bookId: {{book_id}}</p>
       <div class="col-md-3">
       </div>  
     </div>
