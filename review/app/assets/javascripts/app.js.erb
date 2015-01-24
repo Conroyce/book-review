@@ -4,11 +4,11 @@ app.config(function($routeProvider) {
   $routeProvider
   .when("/",{
     templateUrl: "<%= asset_path('templates/books_template.html') %>",
-    controller: "BookCtrl"
+    controller: "BookListCtrl"
   }).
   when("/:id",{
     templateUrl: "<%= asset_path('templates/book_template.html') %>",
-    controller: "ShowCtrl"
+    controller: "BookCtrl"
   }).
   otherwise({
     redirectTo: "/"

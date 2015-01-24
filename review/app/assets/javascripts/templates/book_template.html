@@ -5,11 +5,11 @@
       </div>
 
       <div class="col-md-6">
-        <h2>{{book.title}}</h2><br>
+        <h2>{{book.volumeInfo.title}}</h2><br>
         
-        <form action="/books/{{book.book_id}}/messages" method="post">
+        <form method="post">
           <input type="input" placeholder="Review Title" class="form-control">
-          <input type="textarea" placehodler="Enter Review" class="form-control">
+          <input type="textarea" placeholder="Enter Review" class="form-control">
           <input type="hidden" name="message_user_id[{{book.id}}]">
           <input type="submit" value="Edit Message" class="btn-primary form-control">
         </form>  
