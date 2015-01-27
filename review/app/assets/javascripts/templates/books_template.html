@@ -1,4 +1,25 @@
 <div ng-controller="BookListCtrl">
+  <div class="row">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4 space-4-bot">
+      <h3 class="centered">Search For Books</h3>
+      <div class="search-div">
+          <input type="text" placeholder="Search Books" id="searchBox" name="searchBox" class="form-control" ng-model="query">
+          <input type="submit" value="Search" class="searchButton form-control btn-primary" ng-click="search(query)">
+      </div>
+    </div>
+    <div class="col-md-1">
+      <input type="hidden">
+    </div>
+    <div class="col-md-3">
+      <% if current_user %>
+          <%= link_to "My Reviews", user_messages_path(current_user.id) %>
+      <% else %>
+          <p>Not a Member? <%= link_to "Sign Up", users_path %>     
+      <% end %> 
+    </div>
+  </div>
   <div ng-repeat="book in data.items">
     <div class="col-md-2 even-div">
         <a href="" ng-click="getBook(book.id)" class="show-book"><div class="overlay-wrapper">

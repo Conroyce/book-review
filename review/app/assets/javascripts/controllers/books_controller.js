@@ -2,8 +2,10 @@ app.controller("BookListCtrl",["$http","$scope","BooksBook","$location",function
 
 
   $scope.method = "GET";
-  $scope.url = "https://www.googleapis.com/books/v1/volumes?q=Fiction&maxResults=18";
+  $scope.url = "https://www.googleapis.com/books/v1/volumes?q=" 
+  $scope.ending = "&maxResults=18";
   $scope.book = {title:"hey"}; 
+  $scope.query = "";
   $scope.code = null;
   $scope.reponse = null;
 
@@ -17,7 +19,18 @@ app.controller("BookListCtrl",["$http","$scope","BooksBook","$location",function
     $location.path("/"+id);
   };
 
-  $http({method: $scope.method, url: $scope.url}).
+  $scope.search = function(str) {
+    $http({method: $scope.method, url: $scope.url+str+$scope.ending}).
+    success(function(data,status) {
+      $scope.status = status;
+      $scope.data = data;
+      BooksBook.allBooks = data;
+      console.log($scope.data);
+    });
+    $scope.query = "";
+  };
+
+  $http({method: $scope.method, url: $scope.url+"fiction"+$scope.ending}).
     success(function(data,status) {
       $scope.status = status;
       $scope.data = data;

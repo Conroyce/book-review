@@ -14,6 +14,7 @@ class MessagesController < ApplicationController
   end  
 
   def create 
+    binding.pry
     @book = Book.find(params[:book_id])
     @message = @book.messages.create(message_params)
 
@@ -21,6 +22,7 @@ class MessagesController < ApplicationController
   end  
 
   def show
+    binding.pry
     @message = Message.find(params[:id])
     @book = Book.find(@message.book_id)
   end   
@@ -44,6 +46,7 @@ class MessagesController < ApplicationController
 
   private
   def message_params
+    binding.pry
     @book = Book.find(params[:book_id])
     params["message"]["name"] = current_user.name || "Guest"
     params["message"]["user_id"] = current_user.id || "Guest"
