@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root "books#index"
 
-  resources :books do 
+  resources :books, defaults: {format: :json} do 
     resources :messages
   end  
 
