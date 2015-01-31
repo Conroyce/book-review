@@ -13,10 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require angular
-//= require angular-resource
-//= require angular-route
-//= require app
-//= require_tree ./controllers
-//= require_tree ./services
-//= require_tree ./templates
+//= require handlebars
+//= require main
+//= require api
+//= require ui

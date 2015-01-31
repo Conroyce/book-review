@@ -1,4 +1,3 @@
-
 var getBooks = function() {
   API.getAll(function(books) {
     var bookList = [];
