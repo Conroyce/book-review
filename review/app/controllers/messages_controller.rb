@@ -10,22 +10,17 @@ class MessagesController < ApplicationController
         @book_ids[x.book_id] = @book.title
         x[:book_title] = @book.title
       end 
-    end 
-    render json: @messages  
+    end  
   end  
 
   def create 
-    binding.pry
-    @book = Book.find_by(book_id: params[:book_id])
+    @book = Book.find(params[:book_id])
     @message = @book.messages.create(message_params)
-    render json: @message
   end  
 
   def show
-    binding.pry
     @message = Message.find(params[:id])
     @book = Book.find(@message.book_id)
-    render json: @book
   end   
 
   def edit
@@ -47,13 +42,10 @@ class MessagesController < ApplicationController
 
   private
   def message_params
-    binding.pry
-    @book = Book.find_by(book_id:params[:book_id])
-    params["message"]["book_id"] = @book.id
     params["message"]["name"] = current_user.name || "Guest"
     params["message"]["user_id"] = current_user.id || "Guest"
-    # params["message"]["title"] = params["message"]["title"] || params["title"] || params["message_title"]
-    # params["message"]["book_id"] = params["book_id"] || params["message_book_id"].keys[0] 
+    params["message"]["title"] = params["message"]["title"] || params["title"] || params["message_title"]
+    params["message"]["book_id"] = params["book_id"] || params["message_book_id"].keys[0] 
     @message = params.require(:message).permit(:title,:review, :user_id, :book_id, :name)
   end  
 end
