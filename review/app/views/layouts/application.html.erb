@@ -12,15 +12,15 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
 <div class="container">
    <div class="navbar-header">
-     <a href="/books"><h1>Books</h1></a>
-  
+    <h1><%= link_to "Read It?", books_path %></h1>
+       
      
    </div> 
    <div id="navbar" class="navbar-collapse collapse">
      <% if current_user %>
        <div class="navbar-form navbar-right">
 
-         Welcome, <%= current_user.name %>!
+         <%= link_to "Welcome, #{current_user.name}!", user_messages_path(current_user.id) %>
          <%= link_to "Sign Out", log_out_path, class: "btn btn-success" %>
        </div>  
      <% else %>   

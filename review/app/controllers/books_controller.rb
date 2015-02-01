@@ -5,19 +5,26 @@ class BooksController < ApplicationController
   end  
 
   def create
-    @findbook = Book.find_by(book_id: params[:book][:book_id])
-    if @findbook.try(:title) && @findbook.user_ids.include?(current_user.try(:id))
-      @book = @findbook
-      render :json => @findbook
-    elsif @findbook.try(:title)
-      @book = @findbook
-      @book.user_books.create(book_id: @findbook.id,user_id:current_user.try(:id)) 
-      render :json => @findbook 
-    else
-      @book = Book.create(book_params)
-      render :json => @book
-    end  
-    # redirect_to "/"  
+    
+    # if params[:book_obj]
+    #   binding.pry
+    #   @book_obj = params[:book_obj]
+    #   render :json => params[:book_obj]
+    # else  
+      @findbook = Book.find_by(book_id: params[:book][:book_id])
+      if @findbook.try(:title) && @findbook.user_ids.include?(current_user.try(:id))
+        @book = @findbook
+        render :json => @findbook
+      elsif @findbook.try(:title)
+        @book = @findbook
+        @book.user_books.create(book_id: @findbook.id,user_id:current_user.try(:id)) 
+        render :json => @findbook 
+      else
+        @book = Book.create(book_params)
+        render :json => @book
+      end 
+    # end   
+    
   end  
 
   def show 

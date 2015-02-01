@@ -17,11 +17,6 @@
     <input type="hidden">
   </div>
   <div class="col-md-3">
-    <% if current_user %>
-        <%= link_to "My Reviews", user_messages_path(current_user.id) %>
-    <% else %>
-        <p>Not a Member? <%= link_to "Sign Up", users_path %>     
-    <% end %> 
   </div>
 </div>
 

@@ -93,15 +93,21 @@ $(document).ready(function() {
     var $title = $($this).children().children('input.bookTitle').val();
 
     $.post("/books", {book:{title: $title, book_id: $id}}).success(function(x) {
-      console.log(x)
-      // API.find_id($id, function(data) {
-      //   console.log(data);
+      API.find_id($id, function(data) {
+        console.log(data);
+        // var book = $.param({book:data});
+        // $.get("/books"+$id,book,function(data) console.log(data););
+        // $.ajax({
+        //   type: "GET",
+        //   url: "/books/"+$id,
+        //   data: {book: "hey"},
+        //   dataType: "json"
+        // });
+        var ans = {};
+        ans.title = data.title;
+        ans.id = data.id;
 
-      //   var ans = {};
-      //   ans.title = data.title;
-      //   ans.id = data.id;
-
-      // })
+      })
     });
   })
 
@@ -113,7 +119,7 @@ $(document).ready(function() {
     $('#searchBox').val('');
     console.log($text);
     API.find($text,function(data) {
-      console.log(data);
+      // console.log(data + "api find");
       var bookList = [];
       data.items.forEach(function(book) {
         var ans = {};
