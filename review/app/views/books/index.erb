@@ -3,7 +3,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-4" >
   </div>
   <div class="col-md-4 space-4-bot">
     <h3 class="centered">Search For Books</h3>
@@ -32,7 +32,12 @@
       <div class="col-md-2 even-div">
         <a href="/books/{{id}}" class="show-book"><div class="overlay-wrapper">
           <span class="focus-overlay"></span>
-          <img src={{img}} height="200" width="150"><input type="hidden" value="{{id}}" name="{{id}}" class="bookId"><input type="hidden" value="{{title}}" name="{{title}}" class="bookTitle"><br>
+          <img src={{img}} height="200" width="150"><input type="hidden" value="{{id}}" name="{{id}}" class="bookId">
+          <input type="hidden" value="{{title}}" name="{{title}}" class="bookTitle"><br>
+          <input type="hidden" value="{{rating}}" name="{{rating}}" class="bookRating">
+          <input type="hidden" value="{{ratingCount}}" name="{{ratingCount}}" class="bookRatingCount">
+          <input type="hidden" value="{{description}}" name="{{description}}" class="bookDescription">
+          <input type="hidden" value="{{link}}" name="{{link}}" class="bookLink">
         </div></a>  
         <div class="book-info">
           <a href="/books/{{id}}" class="show-book"><p class="title">{{dispTitle}}</p><input type="hidden" value="{{id}}" name="{{id}}" class="bookId"><input type="hidden" value="{{title}}" name="{{title}}" class="bookTitle"></a>

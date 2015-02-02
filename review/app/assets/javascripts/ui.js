@@ -9,9 +9,17 @@ var getBooks = function() {
       if (checkTitle.length > 28) {
         ans.dispTitle = checkTitle.join("").substr(0,28)+"...";
         ans.title = book.volumeInfo.title;
+        ans.rating = book.volumeInfo.averageRating;
+        ans.ratingCount = book.volumeInfo.ratingsCount;
+        ans.description = book.volumeInfo.description;
+        ans.link = book.accessInfo.webReaderLink;
       } else {
         ans.dispTitle = book.volumeInfo.title;
         ans.title = book.volumeInfo.title;
+        ans.rating = book.volumeInfo.averageRating;
+        ans.ratingCount = book.volumeInfo.ratingsCount;
+        ans.description = book.volumeInfo.description;
+        ans.link = book.accessInfo.webReaderLink;
       }
       
       if (book.volumeInfo.imageLinks == undefined) {
@@ -91,23 +99,35 @@ $(document).ready(function() {
     var $this = this;
     var $id = $($this).children().children('input.bookId').val();
     var $title = $($this).children().children('input.bookTitle').val();
+    var $rating = $($this).children().children('input.bookRating').val();
+    var $ratingCount = $($this).children().children('input.bookRatingCount').val();
+    var $description = $($this).children().children('input.bookDescription').val();
+    var $link = $($this).children().children('input.bookLink').val() || "";
+    console.log($rating);
+    $.post("/books", {
+        book:{
+          title: $title, 
+          book_id: $id,  
+          rating: $rating,
+          ratingCount: $ratingCount,
+          description: $description,
+          link: $link
+      }}).success(function(x) {
+        API.find_id($id, function(data) {
+          console.log(data);
+          // var book = $.param({book:data});
+          // $.get("/books"+$id,book,function(data) console.log(data););
+          // $.ajax({
+          //   type: "GET",
+          //   url: "/books/"+$id,
+          //   data: {book: "hey"},
+          //   dataType: "json"
+          // });
+          var ans = {};
+          ans.title = data.title;
+          ans.id = data.id;
 
-    $.post("/books", {book:{title: $title, book_id: $id}}).success(function(x) {
-      API.find_id($id, function(data) {
-        console.log(data);
-        // var book = $.param({book:data});
-        // $.get("/books"+$id,book,function(data) console.log(data););
-        // $.ajax({
-        //   type: "GET",
-        //   url: "/books/"+$id,
-        //   data: {book: "hey"},
-        //   dataType: "json"
-        // });
-        var ans = {};
-        ans.title = data.title;
-        ans.id = data.id;
-
-      })
+        })
     });
   })
 
@@ -152,6 +172,13 @@ $(document).ready(function() {
   });
 });
 
+$(document).ready(function() {
+  $('.container').on("click",".homeLink",function(e) {
+    e.preventDefault();
+    console.log("hey");
+    getBooks();
+  })
+});
 
 
 

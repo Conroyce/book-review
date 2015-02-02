@@ -37,6 +37,7 @@ h2 {
   background-color: #eee;
   padding-top:50px;
   margin-top:20px;
+  border-radius: 5px;
 }
 .grey-back {
   background-color: #eee;
@@ -102,7 +103,7 @@ a.addBook {
   background-color:#eee;
   box-sizing:border-box;  
   padding:20px;
-  border-radius:3px;
+  border-radius:5px;
 }
 .grey-back {
   border-radius:4px;
@@ -122,19 +123,29 @@ a.addBook {
   border:1px solid #ddd;
   margin:8px auto;
 }
+.border-bot{ 
+  border-bottom: 30px solid white;
+}
 .user_mes {
   margin-bottom: 10px;
 }
+
+.min-height-3 {
+  box-sizing:border-box;
+  min-height:20vh;
+}
 .min-height-5 {
   box-sizing:border-box;
-  padding-top:40px;
+  padding-top:0px;
   min-height:50vh;
+  margin-top:-20px;
 }
 .min-height-7 {
   box-sizing:border-box;
   padding-top:30px;
   min-height:75vh;
 }
+
 
 
 

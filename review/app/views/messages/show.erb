@@ -12,9 +12,13 @@
         <%= f.text_field :review, class:"form-control" %>
         <%= f.hidden_field :book_id, :value => @message.id %>
 
-        <%= f.submit 'Edit Message',class:"btn-primary form-control" %>
+        <div class="col-md-6 space-2-top">
+          <%= f.submit 'Edit Message',class:"btn-primary form-control" %>
+        </div>  
       <% end %>  
-
+      <div class="col-md-6 space-2-top">
+        <%= link_to "Delete", book_message_path(@message.book_id,@message.id), method: :delete,class:"btn-danger btn form-control" %>
+      </div>
       
     </div>
     <div class="col-md-3">
@@ -24,7 +28,7 @@
     <div class="col-md-5">
     </div>
     <div class="col-md-2 space-2-top">
-      <%= link_to "Delete", book_message_path(@message.book_id,@message.id), method: :delete,class:"btn-danger btn centered" %>
+      
     </div>
     <div class="col-md-5">
     </div>

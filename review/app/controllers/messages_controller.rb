@@ -43,8 +43,13 @@ class MessagesController < ApplicationController
 
   private
   def message_params
-    params["message"]["name"] = current_user.name || "Guest"
-    params["message"]["user_id"] = current_user.id || "Guest"
+    if current_user.try(:id)
+      params["message"]["name"] = current_user.name
+      params["message"]["user_id"] = current_user.id
+    else
+      params["message"]["name"] = "Guest"
+      params["message"]["user_id"] = "Guest"
+    end  
     params["message"]["title"] = params["message"]["title"] || params["title"] || params["message_title"]
     params["message"]["book_id"] = params["book_id"] || params["message_book_id"].keys[0] 
     @message = params.require(:message).permit(:title,:review, :user_id, :book_id, :name)
