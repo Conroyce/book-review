@@ -1,4 +1,15 @@
+
 <div class="space-8 container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Favorites</h2>
+    </div>  
+  </div>
+  <div class="row">
+    <div class="col-md-12 grey-back">
+
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-12">
       <h2>My Reviews</h2>
@@ -10,13 +21,13 @@
     <div class="col-md-6 grey-back min-height-7 ">
 
         <% @messages.each do |message| %>
-        <div class="user_mes border-grey">
-          Book: <a href="/users/<%= message.user_id %>/messages/<%= message.id %>"><%= message.book_title %></a><br>
-          Title: <a href="/users/<%= message.user_id %>/messages/<%= message.id %>"><%= message.title %></a><br>
-          Review: <a href="/users/<%= message.user_id %>/messages/<%= message.id %>"><%= message.review %></a><br>
-        </div>  
+          <div class="user_mes border-grey">
+            Book: <a href="/users/<%= message.user_id %>/messages/<%= message.id %>"><%= message.book_title %></a><br>
+            Title: <a href="/users/<%= message.user_id %>/messages/<%= message.id %>"><%= message.title %></a><br>
+            Review: <a href="/users/<%= message.user_id %>/messages/<%= message.id %>"><%= message.review %></a><br>
+          </div>  
         <% end %> 
-  
+    
     </div>
     <div class="col-md-3">
     </div>
