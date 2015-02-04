@@ -1,3 +1,5 @@
+var book = {};
+
 var getBooks = function() {
   API.getAll(function(books) {
     var bookList = [];
@@ -7,29 +9,26 @@ var getBooks = function() {
 
       var checkTitle = book.volumeInfo.title.split("");
       if (checkTitle.length > 28) {
-        ans.dispTitle = checkTitle.join("").substr(0,28)+"...";
-        ans.title = book.volumeInfo.title;
-        ans.rating = book.volumeInfo.averageRating;
-        ans.ratingCount = book.volumeInfo.ratingsCount;
-        ans.description = book.volumeInfo.description;
-        ans.link = book.accessInfo.webReaderLink;
+        ans.dispTitle = checkTitle.join("").substr(0,28)+"...";      
       } else {
         ans.dispTitle = book.volumeInfo.title;
-        ans.title = book.volumeInfo.title;
-        ans.rating = book.volumeInfo.averageRating;
-        ans.ratingCount = book.volumeInfo.ratingsCount;
-        ans.description = book.volumeInfo.description;
-        ans.link = book.accessInfo.webReaderLink;
       }
       
       if (book.volumeInfo.imageLinks == undefined) {
         ans.img = "/mysterybook.jpg";
+        book.img = "/mysterybook.jpg";
       } else {
         ans.img = book.volumeInfo.imageLinks.thumbnail;
+        book.img = book.volumeInfo.imageLinks.thumbnail;
       } 
       ans.authors = book.volumeInfo.authors;
       ans.description = book.volumeInfo.description;
       ans.id = book.id;
+      book.book_id = book.id;
+      book.title = book.volumeInfo.title;
+      book.rating = book.volumeInfo.averageRating;
+      book.ratingCount = book.volumeInfo.ratingsCount;
+      book.link = book.accessInfo.webReaderLink;
 
       bookList.push(ans);
       counter++;
@@ -50,7 +49,7 @@ $(document).ready(function() {
     e.preventDefault();
     var $id = $(this).children('.bookId').val();
     var $title = $(this).children('.bookTitle').val();
-    $.post("/books", {book:{title: $title, book_id: $id} }).success(function(x) {
+    $.post("/books", {book: book }).success(function(x) {
       
       getBooks();
       // API.getAll(function(books) {

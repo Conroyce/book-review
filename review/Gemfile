@@ -1,9 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'httparty'
-
-gem "paperclip"
-
 gem 'bcrypt'
 
 gem 'angularjs-rails'
