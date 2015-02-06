@@ -52,9 +52,9 @@ class BooksController < ApplicationController
     if current_user
       # params["book"]["user_id"] = session[:user_id].to_s  #{params[:description].to_s}
       params[:user_id] = current_user.id.to_s
-      @book = params.require(:book).permit(:title, :book_id, :user_id, :rating, :ratingCount, :description, :link, :avatar, :img)
+      @book = params.require(:book).permit(:title, :book_id, :user_id, :rating, :ratingCount, :description, :link, :img)
     else   
-      @book = params.require(:book).permit(:title ,:book_id, :rating, :ratingCount, :description, :link, :avatar, :img)
+      @book = params.require(:book).permit(:title ,:book_id, :rating, :ratingCount, :description, :link, :img)
     end  
   end 
 

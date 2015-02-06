@@ -7,18 +7,22 @@
       <div class="col-md-3">
       </div>
       <div class="col-md-6 border-bot">
+        <div class="row space-1-top">
+          <div class="col-md-4 size-2">Average Rating: <%= @book.rating %></div>
+          <div class="col-md-5"></div>
+          <div class="col-md-3 lose-5-top"><a href="<%= @book.link %>" class="btn btn-primary btn-sm">Read The Book</a></span></div>
+        </div>  
+        <p class="space-1-top"><%= @book.description %></p>
 
-          <%= form_tag("/books/#{@book.id}/messages", method:"post") do %>
-            <%= text_field_tag :message_title, :title, value: "", placeholder:"Review Title", class:'form-control' %>
-            <%= text_area :message, :review, placeholder:"Enter Review...",class:'form-control' %>
-            <%= hidden_field :message_book_id, @book.book_id %> 
-            <%= hidden_field :message_user_id, @book.user_id %>
+        <%= form_tag("/books/#{@book.id}/messages", method:"post", class: "space-2-top") do %>
+          <%= text_field_tag :message_title, :title, value: "", placeholder:"Review Title", class:'form-control' %>
+          <%= text_area :message, :review, placeholder:"Enter Review...",class:'form-control' %>
+          <%= hidden_field :message_book_id, @book.book_id %> 
+          <%= hidden_field :message_user_id, @book.user_id %>
 
-            <%= submit_tag("Create Review",class:"form-control btn-primary") %>
-          <% end %><br>   
-          <a href="<%= @book.link %>">Read The Book</a>
-          <p>Rating: <%= @book.rating %></p>
-          <p><%= @book.description %></p>
+          <%= submit_tag("Create Review",class:"form-control btn-primary") %>
+        <% end %><br>   
+          
       </div> 
       <div class="col-md-3">
       </div> 

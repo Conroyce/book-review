@@ -1,38 +1,42 @@
-var book = {};
+var booksObj = {};
 
 var getBooks = function() {
   API.getAll(function(books) {
     var bookList = [];
     var counter = 0;
-    books.items.forEach(function(book) {
+    for (var i = 0; i < books.items.length; i++) {
       var ans = {};
+      var bookItem = {}
 
-      var checkTitle = book.volumeInfo.title.split("");
+      var checkTitle = books.items[i].volumeInfo.title.split("");
       if (checkTitle.length > 28) {
         ans.dispTitle = checkTitle.join("").substr(0,28)+"...";      
       } else {
-        ans.dispTitle = book.volumeInfo.title;
+        ans.dispTitle = books.items[i].volumeInfo.title;
       }
       
-      if (book.volumeInfo.imageLinks == undefined) {
+      if (books.items[i].volumeInfo.imageLinks == undefined) {
         ans.img = "/mysterybook.jpg";
-        book.img = "/mysterybook.jpg";
+        bookItem.img = "/mysterybook.jpg";
       } else {
-        ans.img = book.volumeInfo.imageLinks.thumbnail;
-        book.img = book.volumeInfo.imageLinks.thumbnail;
+        ans.img = books.items[i].volumeInfo.imageLinks.thumbnail;
+        bookItem.img = books.items[i].volumeInfo.imageLinks.thumbnail;
       } 
-      ans.authors = book.volumeInfo.authors;
-      ans.description = book.volumeInfo.description;
-      ans.id = book.id;
-      book.book_id = book.id;
-      book.title = book.volumeInfo.title;
-      book.rating = book.volumeInfo.averageRating;
-      book.ratingCount = book.volumeInfo.ratingsCount;
-      book.link = book.accessInfo.webReaderLink;
+      ans.authors = books.items[i].volumeInfo.authors;
+      ans.description = books.items[i].volumeInfo.description;
+      ans.id = books.items[i].id;
+      ans.el = i;
+      bookItem.description = books.items[i].volumeInfo.description;
+      bookItem.book_id = books.items[i].id;
+      bookItem.title = books.items[i].volumeInfo.title;
+      bookItem.rating = books.items[i].volumeInfo.averageRating || "";
+      bookItem.ratingCount = books.items[i].volumeInfo.ratingsCount || "";
+      bookItem.link = books.items[i].accessInfo.webReaderLink;
+      booksObj[i] = bookItem;
 
       bookList.push(ans);
       counter++;
-    });
+    };
 
     var source = $('#book-template').html();
     var template = Handlebars.compile(source);
@@ -49,7 +53,7 @@ $(document).ready(function() {
     e.preventDefault();
     var $id = $(this).children('.bookId').val();
     var $title = $(this).children('.bookTitle').val();
-    $.post("/books", {book: book }).success(function(x) {
+    $.post("/books", {book: book }).success(function(x) { //CONTINUE HEREE!!!!!
       
       getBooks();
       // API.getAll(function(books) {
@@ -91,28 +95,30 @@ $(document).ready(function() {
 });
 
 var exec = function(func, context) {
-      func.call(context);
-}
+  func.call(context);
+};
+
 $(document).ready(function() {
   $('.main').on('click','.show-book',function(e) {
     var $this = this;
-    var $id = $($this).children().children('input.bookId').val();
-    var $title = $($this).children().children('input.bookTitle').val();
-    var $rating = $($this).children().children('input.bookRating').val();
-    var $ratingCount = $($this).children().children('input.bookRatingCount').val();
-    var $description = $($this).children().children('input.bookDescription').val();
-    var $link = $($this).children().children('input.bookLink').val() || "";
-    console.log($rating);
-    $.post("/books", {
+    var $el = $($this).children().children("input.bookEl").val();
+    var book = booksObj[$el];
+    var img = book.img || "/mysterybook.jpg";
+
+    $.post("/books", 
+      {
         book:{
-          title: $title, 
-          book_id: $id,  
-          rating: $rating,
-          ratingCount: $ratingCount,
-          description: $description,
-          link: $link
-      }}).success(function(x) {
-        API.find_id($id, function(data) {
+          title: book.title, 
+          book_id: book.book_id, 
+          rating: book.rating,
+          ratingCount: book.ratingCount,
+          description: book.description,
+          link: book.link,
+          img: img
+        }  
+      }).success(function(x) {
+        console.log(x);
+        API.find_id(book.book_id, function(data) {
           console.log(data);
           // var book = $.param({book:data});
           // $.get("/books"+$id,book,function(data) console.log(data););
@@ -126,10 +132,9 @@ $(document).ready(function() {
           ans.title = data.title;
           ans.id = data.id;
 
-        })
+        });
     });
   })
-
 })
 
 $(document).ready(function() {

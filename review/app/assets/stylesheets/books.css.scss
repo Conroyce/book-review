@@ -2,49 +2,69 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+div a {
+  color:black;
+}
+
 h1 {
   margin-top:10px;
   color:#3C68B4;
   font-weight:450;
 }
+
 h2 {
   text-align:center;
   margin-bottom:15px;
 }
+
 .navbar-form {
   margin-top:12px;
 }
+
 .nav-back {
   background-color:#F9F9F9;
   border-bottom: 1px solid #444;
 }
+
+.lose-5-top {
+  margin-top: -7px;
+}
+
 .space-8 {
   margin-top:80px;
 }
-.space-4-bot {
-  margin-bottom:40px;
-}
+
 .space-1-top {
   margin-top:10px;
 }
+
 .space-2-top {
-  margin-top: 10px;
+  margin-top: 20px;
 }
+
+.space-4-bot {
+  margin-bottom:40px;
+}
+
 .space-right {
   margin-right:10px;
 }
+
 .main-back {
   background-color: #eee;
   padding-top:50px;
   margin-top:20px;
   border-radius: 5px;
 }
+
 .grey-back {
   background-color: #eee;
 }
+
 #navbar {
   color:white;
 }
+
 .even-div {
   height:400px;
 }
@@ -56,14 +76,17 @@ h2 {
   height:200px;
   transition: 400ms;
 }
+
 .overlay-wrapper {
   width:160px;
 }
+
 .focus-overlay:hover {
   opacity:.3;
   background-color:black;
   transition: 400ms;
 }
+
 .book-info {
   width:150px;
   background-color:white;
@@ -73,31 +96,39 @@ h2 {
   height:100px;
   box-shadow: 3px 3px 3px rgba(0,0,0,0.1);
 }
+
 .book-info p {
   margin:5px;
   line-height: 110%;
   color:#444;
 }
+
 .book-info .authors {
   font-size:0.8em;
   color:#777;
 }
+
 .book-info .title {
   margin-bottom: -2px;
   font-size:1.1em;
 }
+
 a.addBook {
   font-size: 0.8em;
 }
+
 .even-div img {
   box-shadow: 2px 2px 3px rba(0,0,0,0.1);
 }
+
 .centered {
   text-align:center;
 }
+
 .book-show h2 {
   text-align:center;
 }
+
 .book-show .col-md-6 {
   margin:0 auto;
   background-color:#eee;
@@ -105,17 +136,20 @@ a.addBook {
   padding:20px;
   border-radius:5px;
 }
+
 .grey-back {
   border-radius:4px;
   padding:20px;
   margin-top:15px;
 }
+
 .white-back {
   background-color:white;
   border-radius:5px;
   padding:10px;
   padding-top:20px;
 }
+
 .border-grey {
   background-color:white;
   padding:15px;
@@ -123,9 +157,11 @@ a.addBook {
   border:1px solid #ddd;
   margin:8px auto;
 }
+
 .border-bot{ 
   border-bottom: 30px solid white;
 }
+
 .user_mes {
   margin-bottom: 10px;
 }
@@ -134,19 +170,37 @@ a.addBook {
   box-sizing:border-box;
   min-height:20vh;
 }
+
 .min-height-5 {
   box-sizing:border-box;
   padding-top:0px;
   min-height:50vh;
   margin-top:-20px;
 }
+
 .min-height-7 {
   box-sizing:border-box;
   padding-top:30px;
   min-height:75vh;
 }
 
+div h1 .homeLink {
+  color:white;
+}
 
+div .navbar-collapse {
+  color: white;
+}
+
+size-2 {
+  font-size:1.2em;
+}
+
+.navbar-brand {
+  font-size: 1.2em;
+  height:20px;
+  margin-top:-7px;
+}
 
 
 
