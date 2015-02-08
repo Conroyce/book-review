@@ -32,12 +32,12 @@
       <div class="col-md-2 even-div">
         <a href="/books/{{id}}" class="show-book"><div class="overlay-wrapper">
           <span class="focus-overlay"></span>
-          <img src={{img}} height="200" width="150"><input type="hidden" value="{{id}}" name="{{id}}" class="bookId">
+          <img src={{img}} height="200" width="150">
           <input type="hidden" value="{{el}}" class="bookEl">
         </div></a>  
         <div class="book-info">
-          <a href="/books/{{id}}" class="show-book"><p class="title">{{dispTitle}}</p><input type="hidden" value="{{id}}" name="{{id}}" class="bookId"><input type="hidden" value="{{title}}" name="{{title}}" class="bookTitle"></a>
-          <a href="/books/{{id}}" class="show-book"><p class="authors">{{authors}}</p><input type="hidden" value="{{id}}" name="{{id}}" class="bookId"><input type="hidden" value="{{title}}" name="{{title}}" class="bookTitle"></a>
+          <a href="/books/{{id}}" class="show-book"><p class="title">{{dispTitle}}</p><input type="hidden" value="{{el}}" class="bookEl"></a>
+          <a href="/books/{{id}}" class="show-book"><p class="authors">{{authors}}</p><input type="hidden" value="{{el}}" class="bookEl"></a>
           <p class="{{id}} addBook"><a href="/books" class="addBook">Add To Favorites<input type="hidden" value="{{id}}" name="{{id}}" class="bookId"><input type="hidden" value="{{title}}" name="{{title}}" class="bookTitle"></a></p>
         </div>  
       </div>

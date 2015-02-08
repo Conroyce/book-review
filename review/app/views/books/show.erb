@@ -8,11 +8,19 @@
       </div>
       <div class="col-md-6 border-bot">
         <div class="row space-1-top">
-          <div class="col-md-4 size-2">Average Rating: <%= @book.rating %></div>
-          <div class="col-md-5"></div>
-          <div class="col-md-3 lose-5-top"><a href="<%= @book.link %>" class="btn btn-primary btn-sm">Read The Book</a></span></div>
+          <div class="col-md-3"><img src="<%= @book.img %>"></div>
+          <div class="col-md-9">
+            <div class="col-md-12">
+              <div class="col-md-5 size-2">Average Rating: <%= @book.rating %></div>
+              <div class="col-md-3"></div>
+              <div class="col-md-4 lose-5-top"><a href="<%= @book.link %>" class="btn btn-primary btn-sm">Read The Book</a></span></div>
+            </div>
+            <div class="col-md-12 space-1-top">
+              <p class="space-1-top book-desc"><%= @book.description %></p>
+            </div>  
+          </div>  
         </div>  
-        <p class="space-1-top"><%= @book.description %></p>
+       
 
         <%= form_tag("/books/#{@book.id}/messages", method:"post", class: "space-2-top") do %>
           <%= text_field_tag :message_title, :title, value: "", placeholder:"Review Title", class:'form-control' %>
