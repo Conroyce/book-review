@@ -65,15 +65,29 @@ $(document).ready(function() {
     $.ajax({
       type: "POST",
       url: "/users/"+$userId+"/favorites",
-      data: {favorite: {user_id: $userId, book_id: book.book_id}}
+      data: {
+        favorite: {
+          user_id: $userId, 
+          book_id: book.book_id
+        },
+        book:{
+          title: book.title, 
+          book_id: book.book_id, 
+          rating: book.rating,
+          ratingCount: book.ratingCount,
+          description: book.description,
+          link: book.link,
+          img: book.img,
+          user_id: $userId 
+        }
+      }
     });
   });
 
   $('.main').on('click','.show-book',function(e) {
-    var $this = this;
-    var $el = $($this).children().children("input.bookEl").val();
+    e.preventDefault();
+    var $el = $(this).children().children("input.bookEl").val();
     var book = booksObj[$el];
-    var img = book.img;
 
     $.post("/books", 
       {
@@ -84,7 +98,7 @@ $(document).ready(function() {
           ratingCount: book.ratingCount,
           description: book.description,
           link: book.link,
-          img: img
+          img: book.img
         }  
       });
   })

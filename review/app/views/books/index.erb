@@ -37,12 +37,16 @@
         </a>  
         <div class="book-info">
           <a href="/books/{{id}}" class="show-book">
-            <p class="title">{{dispTitle}}</p>
-            <input type="hidden" value="{{el}}" class="bookEl">
+            <div>
+              <p class="title">{{dispTitle}}</p>
+              <input type="hidden" value="{{el}}" class="bookEl">
+            </div>  
           </a>
           <a href="/books/{{id}}" class="show-book">
-            <p class="authors">{{authors}}</p>
-            <input type="hidden" value="{{el}}" class="bookEl">
+            <div>
+              <p class="authors">{{authors}}</p>
+              <input type="hidden" value="{{el}}" class="bookEl">
+            </div>  
           </a>
           <% if current_user %>   
             <p class="{{id}} addBook">
