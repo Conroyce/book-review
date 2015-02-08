@@ -70,7 +70,6 @@ $(document).ready(function() {
     var $this = this;
     var $el = $($this).children().children("input.bookEl").val();
     var book = booksObj[$el];
-    console.log(book);
     var img = book.img;
 
     $.post("/books", 
@@ -84,24 +83,7 @@ $(document).ready(function() {
           link: book.link,
           img: img
         }  
-      }).success(function(x) {
-        console.log(x);
-        API.find_id(book.book_id, function(data) {
-          console.log(data);
-          // var book = $.param({book:data});
-          // $.get("/books"+$id,book,function(data) console.log(data););
-          // $.ajax({
-          //   type: "GET",
-          //   url: "/books/"+$id,
-          //   data: {book: "hey"},
-          //   dataType: "json"
-          // });
-          var ans = {};
-          ans.title = data.title;
-          ans.id = data.id;
-
-        });
-    });
+      });
   })
 
   $('.search-div').on('click','.searchButton',function() {
