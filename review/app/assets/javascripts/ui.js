@@ -58,12 +58,15 @@ $(document).ready(function() {
 
   $('.main').on('click','.addBook',function(e) {
     e.preventDefault();
-    var $id = $(this).children('.bookId').val();
-    var $title = $(this).children('.bookTitle').val();
-    $.post("/books", {book: book }).success(function(x) { //CONTINUE HEREE!!!!!
-      
-      API.getAll(getBooks);
-    })
+    var $el = $(this).children("input.bookEl").val();
+    var $userId = $(this).children("input.userId").val();
+    var book = booksObj[$el];
+    // console.log(book.book_id);
+    $.ajax({
+      type: "POST",
+      url: "/users/"+$userId+"/favorites",
+      data: {favorite: {user_id: $userId, book_id: book.book_id}}
+    });
   });
 
   $('.main').on('click','.show-book',function(e) {

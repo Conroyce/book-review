@@ -18,12 +18,15 @@ class UsersController < ApplicationController
     end  
   end 
 
-  def update
-    @user = User.find(params[:id])
-  end  
-
   def edit
+    @user = User.find(params[:id]);
   end
+
+  def update
+    @user = User.find(params[:id]);
+    @user.update(user_params)
+    redirect_to "/users/#{@user[:id]}"
+  end  
 
   private
 
@@ -31,5 +34,8 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :password, :password_confirmation)
   end
 
+  def user_edit_params
+    params.require(:user).permit()
+  end  
   
 end

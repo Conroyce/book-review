@@ -16,8 +16,6 @@
   <div class="col-md-1">
     <input type="hidden">
   </div>
-  <div class="col-md-3">
-  </div>
 </div>
 
 <div class="container main-back">
@@ -46,11 +44,11 @@
             <p class="authors">{{authors}}</p>
             <input type="hidden" value="{{el}}" class="bookEl">
           </a>
-          <% if current_user %>  
+          <% if current_user %>   
             <p class="{{id}} addBook">
               <a href="/books" class="addBook">Add To Favorites
-                <input type="hidden" value="{{id}}" name="{{id}}" class="bookId">
-                <input type="hidden" value="{{title}}" name="{{title}}" class="bookTitle">
+                <input type="hidden" value="<%= current_user.id %>" class="userId">
+                <input type="hidden" value="{{el}}" class="bookEl">
               </a>
             </p>
           <% end %>  

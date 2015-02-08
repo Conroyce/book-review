@@ -11,6 +11,12 @@ class MessagesController < ApplicationController
         x[:book_title] = @book.title
       end 
     end  
+
+    @user_favs = []
+    current_user.favorites.each do |favorite|
+      book = Book.find_by(book_id: favorite.book_id)
+      @user_favs.push(book)
+    end  
   end  
 
   def create 

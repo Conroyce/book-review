@@ -10,6 +10,10 @@ Rails.application.routes.draw do
     resources :messages
   end  
 
+  resources :users do
+    resources :favorites
+  end  
+
   get "/log-in" => "sessions#new"   
 
   post "/log-in" => "sessions#create"
