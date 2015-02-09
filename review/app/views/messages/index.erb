@@ -7,21 +7,23 @@
   </div>
   <div class="row">
     <div class="col-md-12 grey-back">
-      <% @user_favs.each do |book| %>
-        <div class="col-md-2 even-div">
-          <div class="overlay-wrapper">
-            <span class="focus-overlay"></span>
-            <img src="<%= book.img %>" height="200" width="150">
-          </div>
-        </a>  
-        <div class="book-info">
-          <a href="/books/{{id}}" class="show-book">
-            <p class="title"><%= book.title %></p>
-            <input type="hidden" value="{{el}}" class="bookEl">
-          </a>  
-        </div>  
-      </div>
-      <% end %>
+      <div class="centered">
+        <% @user_favs.each do |book| %>
+          <div class="col-md-2 user-book-back">
+
+            <div class="overlay-wrapper">
+              <a href="/books/<%= book.book_id %>">
+                <span class="focus-overlay"></span>
+                <img src="<%= book.img %>" height="200" width="150">
+              </a>
+            </div> 
+          
+            <a href="/books/<%= book.book_id %>" class="show-book">
+              <p class="title"><%= book.title %></p>
+            </a>  
+        </div>
+        <% end %>
+      </div>  
     </div>
   </div>
   <div class="row">

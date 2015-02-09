@@ -1,6 +1,5 @@
 class MessagesController < ApplicationController
   def index
-    binding.pry
     @messages = Message.where(user_id: current_user.id)
     @book_ids = {}
     @messages.each do |x|

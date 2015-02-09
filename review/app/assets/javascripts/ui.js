@@ -52,16 +52,11 @@ $(document).ready(function() {
 
   API.getAll(getBooks);
 
-  var exec = function(func, context) {
-    func.call(context);
-  };
-
   $('.main').on('click','.addBook',function(e) {
-    e.preventDefault();
     var $el = $(this).children("input.bookEl").val();
     var $userId = $(this).children("input.userId").val();
     var book = booksObj[$el];
-    // console.log(book.book_id);
+
     $.ajax({
       type: "POST",
       url: "/users/"+$userId+"/favorites",

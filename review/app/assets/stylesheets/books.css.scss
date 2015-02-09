@@ -141,6 +141,7 @@ a.addBook {
   border-radius:4px;
   padding:20px;
   margin-top:15px;
+  min-height:300px;
 }
 
 .white-back {
@@ -148,6 +149,19 @@ a.addBook {
   border-radius:5px;
   padding:10px;
   padding-top:20px;
+}
+
+.user-book-back {
+  background-color:white;
+  padding:10px;
+  border-radius:7px;
+  margin: 0 10px;
+  margin-bottom:25px;
+  text-align:center;
+}
+
+.user-book-back img {
+  margin-bottom: 10px;
 }
 
 .border-grey {
@@ -207,6 +221,7 @@ size-2 {
   padding:11px;
   border-radius: 5px;
 }
+
 
 
 

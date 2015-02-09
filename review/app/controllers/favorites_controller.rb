@@ -4,7 +4,6 @@ class FavoritesController < ApplicationController
   end  
 
   def create
-    binding.pry
     bookId =params[:favorite][:book_id]
 
     if Book.where(:book_id => bookId).blank?
