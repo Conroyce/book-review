@@ -80,7 +80,6 @@ $(document).ready(function() {
   });
 
   $('.main').on('click','.show-book',function(e) {
-    e.preventDefault();
     var $el = $(this).children().children("input.bookEl").val();
     var book = booksObj[$el];
 
@@ -96,14 +95,34 @@ $(document).ready(function() {
           img: book.img
         }  
       });
-  })
+  });
 
-  $('.search-div').on('click','.searchButton',function() {
+  $('.search-div').on('submit',function(e) {
+    e.preventDefault();
     var $text = $('#searchBox').val();
     $('#searchBox').val('');
     API.find($text,getBooks);
   });
 
+  $('.addRating').on('submit',function(e) {
+    e.preventDefault();
+    var $el = $(this).children("input.bookEl").val();
+    var $count = $(this).children("input.bookCount").val();
+    var $oldRating = $(this).children("input.bookRating").val();
+    var $newRating = $('input:radio[name=rating]:checked').val();
+    var $rating = (($oldRating * $count + $newRating)/($count+1)).toFixed(2);
+    console.log($rating);
+
+    $.ajax({
+      url: "/books/"+$el,
+      type: "PUT",
+      data: {
+        book: {
+          book_id: $el,
+          rating: $rating
+        }}
+    });
+  });
 });
 
 

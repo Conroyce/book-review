@@ -28,9 +28,11 @@ class BooksController < ApplicationController
   end  
 
   def update
-    @book = Book.find(params[:id])
-    @book.update(users_books_params)
-    redirect_to "/books/#{params[:id]}"
+    binding.pry
+    @book = Book.find_by(book_id: params[:id])
+    @book.update(rating: params[:book][:rating]);
+    @book.update(ratingCount: @book.ratingCount + 1)
+    redirect_to "/books"
   end 
 
   def destroy
@@ -58,8 +60,8 @@ class BooksController < ApplicationController
     end  
   end 
 
-  def users_books_params
-    params[:user_id] = current_user.id.to_s
-    @book = params.require(:user_books).permit(:title, :book_id, :user_id)
+  def book_edit_params
+    @book = params.require(:book).permit(:rating)
   end 
+
 end
