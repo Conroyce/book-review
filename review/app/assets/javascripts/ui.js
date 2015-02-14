@@ -1,4 +1,13 @@
 $(document).ready(function() {
+  var sPageURL = window.location.href.split('/');
+  console.log(sPageURL); 
+  if (sPageURL[sPageURL.length-2] == "books") {
+    API.find(sPageURL[sPageURL.length-1], 
+      function(data) {
+        var book = data.items[0];
+        $('bookShowTitle').html(book.volumeInfo.title)
+      });
+  }
 
   var booksObj = {};
 
@@ -111,7 +120,7 @@ $(document).ready(function() {
     var $oldRating = $(this).children("input.bookRating").val();
     var $newRating = $('input:radio[name=rating]:checked').val();
     var $rating = (($oldRating * $count + $newRating)/($count+1)).toFixed(2);
-    console.log($rating);
+    console.log($rating,$count,$newRating);
 
     $.ajax({
       url: "/books/"+$el,
@@ -123,6 +132,14 @@ $(document).ready(function() {
         }}
     });
   });
+
+  $('.homeLink').on('click',function(e) {
+    e.preventDefault();
+    console.log("hey");
+    var sPageURL = window.location.search;
+    console.log(sPageURL);
+    // API.find();
+  })
 });
 
 

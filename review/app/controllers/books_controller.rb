@@ -20,7 +20,7 @@ class BooksController < ApplicationController
   end  
 
   def show
-    @book = Book.find_by(book_id: params[:id])
+    # @book = Book.find_by(book_id: params[:id])
   end  
 
   def edit
@@ -28,11 +28,11 @@ class BooksController < ApplicationController
   end  
 
   def update
-    binding.pry
     @book = Book.find_by(book_id: params[:id])
     @book.update(rating: params[:book][:rating]);
-    @book.update(ratingCount: @book.ratingCount + 1)
-    redirect_to "/books"
+    @book.update(ratingCount: @book.ratingCount + 1);
+    # redirect_to action:"show", id: @book.id  #this is the issue! conflict between single page app and rails app
+    redirect_to "/books/#{@book.id}"
   end 
 
   def destroy
