@@ -15,15 +15,22 @@
               <div class="col-md-5 size-2 bookShowRating"></div>
 
               <div class="col-md-3"></div>
-
+              <div class="col-md-4 lose-5-top bookShowLink"></div>
             </div>
             <div class="col-md-12 space-1-top">
-
+              <p class="space-1-top book-desc bookShowDesc"></p>
             </div>  
           </div>  
         </div>  
 
-  
+        <%= form_tag("/books/#{@book.id}/messages", method:"post", class: "space-2-top") do %>
+          <%= text_field_tag :message_title, :title, value: "", placeholder:"Review Title", class:'form-control' %>
+          <%= text_area :message, :review, placeholder:"Enter Review...",class:'form-control' %>
+            <%= hidden_field :message_book_id, @book.book_id %>
+            <%= hidden_field :message_user_id, @book.user_id %>
+
+          <%= submit_tag("Create Review",class:"form-control btn-primary") %>
+        <% end %><br>   
           
       </div> 
       <div class="col-md-3">
@@ -35,13 +42,22 @@
     </div>  
     <div class="col-md-6 min-height-5">  
       <h2>Reviews</h2>
-
+       <% if @book.try(:messages) %>
+        <% @book.messages.each do |message| %>
+          <div class="col-md-12 border-grey">
+            User: <a href="/books/<%= @book.id %>/messages/<%= message.id %>"><%= message.name %></a><br>
+            Title: <a href="/books/<%= @book.id %>/messages/<%= message.id %>"><%= message.title %></a><br>
+            Review: <a href="/books/<%= @book.id %>/messages/<%= message.id %>"><%= message.review %></a><br>
+          </div>  
+        <% end %>  
+      <% else %>
+      <% end %>
     </div>
     <div class="col-md-3">
     </div>  
   </div>  
 </div>
-<%= javascript_include_tag params[:controller], "data-turbolinks-track" => true %>
+
 <script>
   paramsCheck();
 </script>

@@ -8,14 +8,13 @@ var paramsCheck = function() {
       $('.bookShowTitle').html(book.volumeInfo.title);
       $('.bookShowImg').html('<img src="' + book.volumeInfo.imageLinks.thumbnail + '">');
       $('.bookShowRating').html('Average Rating: ' + book.volumeInfo.averageRating);
+      $('.bookShowLink').html('<a href="' + book.accessInfo.webReaderLink + '" class="btn btn-primary">Read The Book</a>');
+      $('.bookShowDesc').html(book.volumeInfo.description)
     });
   }
 }
 
 $(document).ready(function() {  
-  var book;
-
-  paramsCheck();
 
   var booksObj = {};
 
@@ -80,17 +79,12 @@ $(document).ready(function() {
       data: {
         favorite: {
           user_id: $userId, 
-          book_id: book.book_id
+          book_id: book.book_id.
+          img: book.volumeInfo.imageLinks.thumbnail,
+          title: book.volumeInfo.title
         },
-        book:{
-          title: book.title, 
-          book_id: book.book_id, 
-          rating: book.rating,
-          ratingCount: book.ratingCount,
-          description: book.description,
-          link: book.link,
-          img: book.img,
-          user_id: $userId 
+        { book: { 
+          book_id: book.book_id 
         }
       }
     });
@@ -101,11 +95,8 @@ $(document).ready(function() {
     var $el = $(this).children().children("input.bookEl").val();
     var book = booksObj[$el];
 
-    console.log("show-book",h,book);
-    $('.bookShowTitle').html(book.title);
-    $('.bookShowImg').html('<img src="' + book.img + '">');
-    $('.bookShowRating').html('Average Rating: ' + book.rating);
- 
+    $.post("/books",{ book: { book_id: book.book_id } });
+
     // $.post("/books", 
     //   {
     //     book:{
@@ -143,7 +134,8 @@ $(document).ready(function() {
         book: {
           book_id: $el,
           rating: $rating
-        }}
+        }
+      }
     });
   });
 
