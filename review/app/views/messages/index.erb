@@ -1,37 +1,38 @@
-
 <div class="space-8 container">
   <div class="row">
     <div class="col-md-12">
       <h2>Favorites</h2>
     </div>  
   </div>
+
   <div class="row">
     <div class="col-md-12 grey-back">
       <div class="centered">
+
         <% current_user.favorites.each do |book| %>
           <div class="col-md-2 user-book-back">
-
             <div class="overlay-wrapper">
               <a href="/books/<%= book.book_id %>">
                 <span class="focus-overlay"></span>
                 <img src="<%= book.img %>" height="200" width="150">
               </a>
-            </div> 
-          
+            </div>           
             <a href="/books/<%= book.book_id %>" class="show-book">
               <p class="title"><%= book.title %></p>
             </a>  
-
           </div>
         <% end %>
+
       </div>  
     </div>
   </div>
+
   <div class="row">
     <div class="col-md-12">
       <h2>My Reviews</h2>
     </div>
   </div>
+
   <div class="row">
     <div class="col-md-3">
     </div>

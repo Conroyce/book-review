@@ -42,6 +42,6 @@ class MessagesController < ApplicationController
     end  
     params["message"]["title"] = params["message"]["title"] || params["title"] || params["message_title"]
     params["message"]["book_id"] = params["book_id"] || params["message_book_id"].keys[0] 
-    @message = params.require(:message).permit(:title,:review, :user_id, :book_id, :name)
+    @message = params.require(:message).permit(:title, :review, :user_id, :book_id, :name)
   end  
 end
