@@ -5,14 +5,7 @@ class BooksController < ApplicationController
   end  
 
   def create
-    @findbook = Book.find_by(book_id: params[:book][:book_id])
-    if @findbook.user_ids.include?(current_user.try(:id))
-      @book = @findbook
-      render :json => @findbook
-    else
-      @book = Book.create(book_params)
-      render :json => @book
-    end     
+    @book = Book.find_by(book_id: params[:book][:book_id]) || Book.create(book_params)     
   end  
 
   def show

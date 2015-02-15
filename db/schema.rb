@@ -61,14 +61,4 @@ ActiveRecord::Schema.define(version: 20150215013924) do
     t.datetime "updated_at"
   end
 
-  create_table "users_books", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "book_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "users_books", ["book_id"], name: "index_users_books_on_book_id", using: :btree
-  add_index "users_books", ["user_id"], name: "index_users_books_on_user_id", using: :btree
-
 end

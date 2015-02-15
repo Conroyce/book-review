@@ -1,6 +1,6 @@
 class CreateUserBooks < ActiveRecord::Migration
   def change
-    drop_table :user_books
+    # drop_table :user_books
 
     create_table :user_books do |t|
       t.belongs_to :user, index: true
