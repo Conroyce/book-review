@@ -32,7 +32,7 @@
   <div class="entry">
     {{#each this.books}}
       <div class="col-md-2 even-div">
-        <a href="/books/{{id}}">
+        <a href="/books/{{id}}" class="show-book">
           <div class="overlay-wrapper">
             <span class="focus-overlay"></span>
             <img src={{img}} height="200" width="150">
@@ -40,13 +40,13 @@
           </div>
         </a>  
         <div class="book-info">
-          <a href="/books/{{id}}">
+          <a href="/books/{{id}}" class="show-book">
             <div>
               <p class="title">{{dispTitle}}</p>
               <input type="hidden" value="{{el}}" class="bookEl">
             </div>  
           </a>
-          <a href="/books/{{id}}">
+          <a href="/books/{{id}}" class="show-book">
             <div>
               <p class="authors">{{authors}}</p>
               <input type="hidden" value="{{el}}" class="bookEl">

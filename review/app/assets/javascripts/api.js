@@ -1,7 +1,6 @@
 window.API = (function() {
   var start = "https://www.googleapis.com/books/v1/volumes"
   var allBooks = "https://www.googleapis.com/books/v1/volumes?q=Fiction&maxResults=18";
-  
 
   var getAll = function(callback) {
     $.get(allBooks,callback)
