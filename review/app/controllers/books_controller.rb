@@ -5,7 +5,6 @@ class BooksController < ApplicationController
   end  
 
   def create
-    binding.pry
     @findbook = Book.find_by(book_id: params[:book][:book_id])
     if @findbook.try(:title) && @findbook.user_ids.include?(current_user.try(:id))
       @book = @findbook

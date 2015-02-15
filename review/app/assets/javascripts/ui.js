@@ -71,7 +71,7 @@ $(document).ready(function() {
   $('.main').on('click','.addBook',function(e) {
     var $el = $(this).children("input.bookEl").val();
     var $userId = $(this).children("input.userId").val();
-    var book = booksObj[$el];
+    var book = booksObj[$el];);
 
     $.ajax({
       type: "POST",
@@ -79,11 +79,11 @@ $(document).ready(function() {
       data: {
         favorite: {
           user_id: $userId, 
-          book_id: book.book_id.
-          img: book.volumeInfo.imageLinks.thumbnail,
-          title: book.volumeInfo.title
+          book_id: book.book_id,
+          img: book.img,
+          title: book.title
         },
-        { book: { 
+        book: { 
           book_id: book.book_id 
         }
       }

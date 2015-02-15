@@ -11,22 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150209030140) do
+ActiveRecord::Schema.define(version: 20150215013924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "books", force: true do |t|
-    t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "book_id"
     t.integer  "user_id"
-    t.decimal  "rating",      precision: 3, scale: 2
-    t.integer  "ratingCount"
-    t.string   "description"
-    t.string   "link"
-    t.string   "img"
   end
 
   create_table "favorites", force: true do |t|
@@ -34,6 +28,8 @@ ActiveRecord::Schema.define(version: 20150209030140) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.string   "book_id"
+    t.string   "title"
+    t.string   "img"
   end
 
   create_table "messages", force: true do |t|
