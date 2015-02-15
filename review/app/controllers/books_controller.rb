@@ -28,11 +28,11 @@ class BooksController < ApplicationController
   end  
 
   def update
-    binding.pry
     @book = Book.find_by(book_id: params[:id])
     @book.update(rating: params[:book][:rating]);
-    @book.update(ratingCount: @book.ratingCount + 1)
-    redirect_to "/books"
+    @book.update(ratingCount: @book.ratingCount + 1);
+    # redirect_to action:"show", id: @book.id  #this is the issue! conflict between single page app and rails app
+    redirect_to "/books/#{@book.id}"
   end 
 
   def destroy
@@ -42,21 +42,21 @@ class BooksController < ApplicationController
 
   private
   def book_params
-    if params[:book][:description].length > 255
-      params[:book][:description] = params[:book][:description][0,252]+"..."
-    end  
-    if Book.find_by(book_id:params[:id]).try(:title)
-      params[:title] = Book.find_by(book_id:params[:id]).title
-    else 
-      params[:title] = params[:book][:title]  
-    end
-    params[:book_id] = params[:id] || params[:book][:book_id]
+    # if params[:book][:description].length > 255
+    #   params[:book][:description] = params[:book][:description][0,252]+"..."
+    # end  
+    # if Book.find_by(book_id:params[:id]).try(:title)
+    #   params[:title] = Book.find_by(book_id:params[:id]).title
+    # else 
+    #   params[:title] = params[:book][:title]  
+    # end
+    # params[:book_id] = params[:id] || params[:book][:book_id]
     if current_user
       # params["book"]["user_id"] = session[:user_id].to_s  #{params[:description].to_s}
       params[:user_id] = current_user.id.to_s
-      @book = params.require(:book).permit(:title, :book_id, :user_id, :rating, :ratingCount, :description, :link, :img)
+      @book = params.require(:book).permit(:book_id, :user_id)
     else   
-      @book = params.require(:book).permit(:title ,:book_id, :rating, :ratingCount, :description, :link, :img)
+      @book = params.require(:book).permit(:book_id)
     end  
   end 
 

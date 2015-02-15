@@ -1,22 +1,17 @@
 class MessagesController < ApplicationController
   def index
     @messages = Message.where(user_id: current_user.id)
-    @book_ids = {}
-    @messages.each do |x|
-      if @book_ids[x.book_id]
-        x[:book_title] = @book_ids[x.book_id]
-      else
-        @book = Book.find(x.book_id)
-        @book_ids[x.book_id] = @book.title
-        x[:book_title] = @book.title
-      end 
-    end  
-
-    @user_favs = []
-    current_user.favorites.each do |favorite|
-      book = Book.find_by(book_id: favorite.book_id)
-      @user_favs.push(book)
-    end  
+    # @book_ids = {}
+    # @messages.each do |x|
+    #   if @book_ids[x.book_id]
+    #     x[:book_title] = @book_ids[x.book_id]
+    #   else
+    #     @book = Book.find(x.book_id)
+    #     @book_ids[x.book_id] = @book.title
+    #     x[:book_title] = @book.title
+    #   end 
+    # end  
+  
   end  
 
   def create 

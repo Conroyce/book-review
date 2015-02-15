@@ -1,6 +1,6 @@
 <div class="space-8 container book-show">
   <div class="col-md-12">
-    <h2><%= @book.title %></h2>
+    <h2 class="bookShowTitle"></h2>
   </div>  
 
   <div class="row">
@@ -8,39 +8,26 @@
       </div>
       <div class="col-md-6 border-bot">
         <div class="row space-1-top">
-          <div class="col-md-3"><img src="<%= @book.img %>"></div>
+          <div class="col-md-3 bookShowImg"></div>
           <div class="col-md-9">
             <div class="col-md-12">
-              <div class="col-md-5 size-2">Average Rating: <%= @book.rating %></div>
+
+              <div class="col-md-5 size-2 bookShowRating"></div>
+
               <div class="col-md-3"></div>
-              <div class="col-md-4 lose-5-top"><a href="<%= @book.link %>" class="btn btn-primary btn-sm">Read The Book</a></span></div>
+              <div class="col-md-4 lose-5-top bookShowLink"></div>
             </div>
             <div class="col-md-12 space-1-top">
-              <p class="space-1-top book-desc"><%= @book.description %></p>
+              <p class="space-1-top book-desc bookShowDesc"></p>
             </div>  
           </div>  
         </div>  
-       
-        <% if current_user %>
-          <form class="addRating">
-            Rate This Book! 
-            <input type="radio" name="rating" value="1">1
-            <input type="radio" name="rating" value="2">2
-            <input type="radio" name="rating" value="3">3
-            <input type="radio" name="rating" value="4">4
-            <input type="radio" name="rating" value="5">5
-            <input type="hidden"value="<%= @book.book_id %>" class="bookEl">
-            <input type="hidden" value="<%= @book.rating %>" class="bookRating">
-            <input type="hidden" value="<%= @book.ratingCount %>" class="bookCount">
-            <input type="submit" class="btn">
-          </form>
-        <% end %>  
 
         <%= form_tag("/books/#{@book.id}/messages", method:"post", class: "space-2-top") do %>
           <%= text_field_tag :message_title, :title, value: "", placeholder:"Review Title", class:'form-control' %>
           <%= text_area :message, :review, placeholder:"Enter Review...",class:'form-control' %>
-          <%= hidden_field :message_book_id, @book.book_id %> 
-          <%= hidden_field :message_user_id, @book.user_id %>
+            <%= hidden_field :message_book_id, @book.book_id %>
+            <%= hidden_field :message_user_id, @book.user_id %>
 
           <%= submit_tag("Create Review",class:"form-control btn-primary") %>
         <% end %><br>   
@@ -55,7 +42,7 @@
     </div>  
     <div class="col-md-6 min-height-5">  
       <h2>Reviews</h2>
-      <% if @book.try(:messages) %>
+       <% if @book.try(:messages) %>
         <% @book.messages.each do |message| %>
           <div class="col-md-12 border-grey">
             User: <a href="/books/<%= @book.id %>/messages/<%= message.id %>"><%= message.name %></a><br>
@@ -64,9 +51,13 @@
           </div>  
         <% end %>  
       <% else %>
-      <% end %> 
+      <% end %>
     </div>
     <div class="col-md-3">
     </div>  
   </div>  
 </div>
+
+<script>
+  paramsCheck();
+</script>

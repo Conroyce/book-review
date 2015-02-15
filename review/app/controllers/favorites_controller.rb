@@ -4,6 +4,7 @@ class FavoritesController < ApplicationController
   end  
 
   def create
+    binding.pry
     bookId =params[:favorite][:book_id]
 
     if Book.where(:book_id => bookId).blank?
@@ -24,13 +25,13 @@ class FavoritesController < ApplicationController
   end  
 
   def favorite_params
-    params.require(:favorite).permit(:book_id,:user_id)
+    params.require(:favorite).permit(:book_id,:user_id,:title,:img)
   end  
 
   def book_params
-    if params[:book][:description].length > 255
-      params[:book][:description] = params[:book][:description][0,252]+"..."
-    end
-    @book = params.require(:book).permit(:title, :book_id, :user_id, :rating, :ratingCount, :description, :link, :img)
+    if current_user
+      params[:book][:user_id] = current_user.id
+    end  
+    @book = params.require(:book).permit(:book_id, :user_id)
   end  
 end
