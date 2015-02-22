@@ -11,10 +11,12 @@ var paramsCheck = function() {
       $('.bookShowImg').html('<img src="' + book.volumeInfo.imageLinks.thumbnail + '">');
       $('.bookShowRating').html('Average Rating: ' + book.volumeInfo.averageRating);
       $('.bookShowLink').html('<a href="' + book.accessInfo.webReaderLink + '" class="btn btn-primary">Read The Book</a>');
-      $('.bookShowDesc').html(book.volumeInfo.description)
+      $('.bookShowDesc').html(book.volumeInfo.description);
+      $('.bookHiddenRating').html(
+        '<input type="hidden" value="'+book.volumeInfo.averageRating+'" class="bookRating"><input type="hidden" value="'+book.volumeInfo.ratingsCount+'" class="bookCount">');
     });
   }
-}
+};
 
 var getBooks = function(books) {
   booksObj = {};
@@ -93,23 +95,23 @@ $(document).ready(function() {
     API.find($text,getBooks);
   });
 
-  $('.addRating').on('submit',function(e) {
-    e.preventDefault();
-    var $el = $(this).children("input.bookEl").val();
-    var $count = $(this).children("input.bookCount").val();
-    var $oldRating = $(this).children("input.bookRating").val();
+  $('.addRating').on('click','.ratingSubmit',function(e) {
+    console.log("hey");
+    var sPageURL = window.location.href.split('/');
+    var $count = $("input.bookCount").val();
+    var $oldRating = $("input.bookRating").val();
     var $newRating = $('input:radio[name=rating]:checked').val();
-    var $rating = (($oldRating * $count + $newRating)/($count+1)).toFixed(2);
-    console.log($rating,$count,$newRating);
+    var $rating = ((($oldRating * $count) + $newRating)/($count+1));
+    console.log($count,$oldRating,$newRating,$rating,$rating.toFixed(2));
 
     $.ajax({
-      url: "/books/"+$el,
+      url: "/books/"+sPageURL[sPageURL.length-1],
       type: "PUT",
       data: {
-        book: {
-          book_id: $el,
-          rating: $rating
-        }
+        book_id: sPageURL[sPageURL.length-1],
+        oldRating: $oldRating,
+        newRating: $newRating,
+        count: $count
       }
     });
   });
