@@ -68,14 +68,14 @@ var getBooks = function(books) {
 };
 
 var descExpand = function() {
-  $('.tracker').on('click', '.desc-expand', function(e) {
+  $('.book-show').on('click', '.desc-expand', function(e) {
     $(this).parent().next().css('display', 'inline');
     $(this).parent().hide();
   })
 }
 
 var descContract = function() {
-  $('.tracker').on('click', '.desc-contract', function(e) {
+  $('.book-show').on('click', '.desc-contract', function(e) {
     $(this).parent().prev().show();
     $(this).parent().hide();
   });
