@@ -8,8 +8,8 @@ var paramsCheck = function() {
         var book = data.items[0];
         console.log("paramsCheck",book);
         $('.bookShowTitle').html(book.volumeInfo.title);
-        $('.bookShowImg').html('<img src="' + book.volumeInfo.imageLinks.thumbnail + '">');
-        $('.bookShowRating').html('<strong>Average Rating:</strong> ' + book.volumeInfo.averageRating);
+        $('.bookShowImg').html('<img width="100%" src="' + book.volumeInfo.imageLinks.thumbnail + '">');
+        $('.bookShowRating').html('<strong>Rating:</strong> ' + book.volumeInfo.averageRating+ " / 5");
         $('.bookShowLink').html('<a href="' + book.accessInfo.webReaderLink + '" class="btn btn-primary">Read The Book</a>');
         $('.bookShowDesc').html("<strong>Overview - </strong>"+book.volumeInfo.description);
         $('.bookShowAuthors').html("<strong>By</strong> " + book.volumeInfo.authors);
