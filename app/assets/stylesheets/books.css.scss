@@ -54,7 +54,7 @@ h2 {
 }
 
 .main-back {
-  background-color: #eee;
+  border:1px solid #ddd;
   padding-top:50px;
   margin-top:20px;
   border-radius: 5px;
@@ -114,6 +114,10 @@ h2 {
 .book-info .title {
   margin-bottom: -2px;
   font-size:1.1em;
+}
+
+.book-shadow {
+  box-shadow: 3px 0px 3px rgba(0,0,0,0.1);
 }
 
 a.addBook {
