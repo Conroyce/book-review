@@ -1,13 +1,5 @@
 var booksObj = {};
 
-// var descriptionParser = function(desc) {
-//   if (desc.length > 395) {
-//     return '<p>' + desc.substr(0,395) + '...<a class="desc-expand"> Show More </a><span class="desc-hidden">' + desc.substr(395) + '</span</p>'; 
-//   } else {
-//     return '<p>' + desc + '</p>';
-//   }
-// };
-
 var descriptionParser = function(desc) {
   if (desc.length > 395) {
     return '<p>' + desc.substr(0,395) + '...<a class="desc-expand"> Show More </a></p><p class="desc-hidden">' + desc + ' <a class="desc-contract">Hide</a></p>';
@@ -22,7 +14,6 @@ var paramsCheck = function() {
     API.find(sPageURL[sPageURL.length-1], 
       function(data) {
         var book = data.items[0];
-        console.log("paramsCheck",book);
         var description = descriptionParser(book.volumeInfo.description);
         $('.bookShowTitle').html(book.volumeInfo.title);
         $('.bookShowImg').html('<img width="100%" src="' + book.volumeInfo.imageLinks.thumbnail + '">');
@@ -78,8 +69,6 @@ var getBooks = function(books) {
 
 var descExpand = function() {
   $('.tracker').on('click', '.desc-expand', function(e) {
-    console.log("attempting to show");
-    console.log($(this));
     $(this).parent().next().css('display', 'inline');
     $(this).parent().hide();
   })
@@ -87,7 +76,6 @@ var descExpand = function() {
 
 var descContract = function() {
   $('.tracker').on('click', '.desc-contract', function(e) {
-    console.log('.desc-contract');
     $(this).parent().prev().show();
     $(this).parent().hide();
   });
