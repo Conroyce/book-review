@@ -76,19 +76,24 @@ var getBooks = function(books) {
   $('.main').append(html);
 };
 
-$(document).ready(function() {  
-  $('.border-bot').on('click', '.desc-expand', function() {
+var descExpand = function() {
+  $('.tracker').on('click', '.desc-expand', function(e) {
+    console.log("attempting to show");
     console.log($(this));
     $(this).parent().next().css('display', 'inline');
     $(this).parent().hide();
   })
+}
 
-  $('.border-bot').on('click', '.desc-contract', function() {
-    console.log($(this));
+var descContract = function() {
+  $('.tracker').on('click', '.desc-contract', function(e) {
+    console.log('.desc-contract');
     $(this).parent().prev().show();
     $(this).parent().hide();
+  });
+};
 
-  })
+$(document).ready(function() { 
 
   $('.main').on('click','.addBook',function(e) {
     var $el = $(this).children("input.bookEl").val();
