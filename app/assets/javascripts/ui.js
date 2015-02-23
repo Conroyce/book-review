@@ -3,18 +3,19 @@ var booksObj = {};
 var paramsCheck = function() {
   var sPageURL = window.location.href.split('/');
   if (sPageURL[sPageURL.length-2] == "books") {
-  API.find(sPageURL[sPageURL.length-1], 
-    function(data) {
-      var book = data.items[0];
-      console.log("paramsCheck",book);
-      $('.bookShowTitle').html(book.volumeInfo.title);
-      $('.bookShowImg').html('<img src="' + book.volumeInfo.imageLinks.thumbnail + '">');
-      $('.bookShowRating').html('Average Rating: ' + book.volumeInfo.averageRating);
-      $('.bookShowLink').html('<a href="' + book.accessInfo.webReaderLink + '" class="btn btn-primary">Read The Book</a>');
-      $('.bookShowDesc').html(book.volumeInfo.description);
-      $('.bookHiddenRating').html(
-        '<input type="hidden" value="'+book.volumeInfo.averageRating+'" class="bookRating"><input type="hidden" value="'+book.volumeInfo.ratingsCount+'" class="bookCount">');
-    });
+    API.find(sPageURL[sPageURL.length-1], 
+      function(data) {
+        var book = data.items[0];
+        console.log("paramsCheck",book);
+        $('.bookShowTitle').html(book.volumeInfo.title);
+        $('.bookShowImg').html('<img src="' + book.volumeInfo.imageLinks.thumbnail + '">');
+        $('.bookShowRating').html('<strong>Average Rating:</strong> ' + book.volumeInfo.averageRating);
+        $('.bookShowLink').html('<a href="' + book.accessInfo.webReaderLink + '" class="btn btn-primary">Read The Book</a>');
+        $('.bookShowDesc').html("<strong>Overview - </strong>"+book.volumeInfo.description);
+        $('.bookShowAuthors').html("<strong>By</strong> " + book.volumeInfo.authors);
+        $('.bookHiddenRating').html(
+          '<input type="hidden" value="'+book.volumeInfo.averageRating+'" class="bookRating"><input type="hidden" value="'+book.volumeInfo.ratingsCount+'" class="bookCount">');
+      });
   }
 };
 
