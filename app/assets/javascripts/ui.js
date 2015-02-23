@@ -1,20 +1,29 @@
 var booksObj = {};
 
+var descriptionParser = function(desc) {
+  if (desc.length > 395) {
+    return '<p>' + desc.substr(0,395) + '...<a class="desc-expand"> Show More </a></p><p class="desc-hidden">' + desc + ' <a class="desc-contract">Hide</a></p>';
+  } else {
+    return '<p>' + desc + '</p>';
+  }
+};
+
 var paramsCheck = function() {
   var sPageURL = window.location.href.split('/');
   if (sPageURL[sPageURL.length-2] == "books") {
-  API.find(sPageURL[sPageURL.length-1], 
-    function(data) {
-      var book = data.items[0];
-      console.log("paramsCheck",book);
-      $('.bookShowTitle').html(book.volumeInfo.title);
-      $('.bookShowImg').html('<img src="' + book.volumeInfo.imageLinks.thumbnail + '">');
-      $('.bookShowRating').html('Average Rating: ' + book.volumeInfo.averageRating);
-      $('.bookShowLink').html('<a href="' + book.accessInfo.webReaderLink + '" class="btn btn-primary">Read The Book</a>');
-      $('.bookShowDesc').html(book.volumeInfo.description);
-      $('.bookHiddenRating').html(
-        '<input type="hidden" value="'+book.volumeInfo.averageRating+'" class="bookRating"><input type="hidden" value="'+book.volumeInfo.ratingsCount+'" class="bookCount">');
-    });
+    API.find(sPageURL[sPageURL.length-1], 
+      function(data) {
+        var book = data.items[0];
+        var description = descriptionParser(book.volumeInfo.description);
+        $('.bookShowTitle').html(book.volumeInfo.title);
+        $('.bookShowImg').html('<img width="100%" src="' + book.volumeInfo.imageLinks.thumbnail + '">');
+        $('.bookShowRating').html('<strong>Rating:</strong> ' + book.volumeInfo.averageRating+ " / 5");
+        $('.bookShowLink').html('<a href="' + book.accessInfo.webReaderLink + '" class="btn btn-primary">Read The Book</a>');
+        $('.bookShowDesc').html("<strong>Overview - </strong>" + description);
+        $('.bookShowAuthors').html("<strong>By</strong> " + book.volumeInfo.authors);
+        $('.bookHiddenRating').html(
+          '<input type="hidden" value="'+book.volumeInfo.averageRating+'" class="bookRating"><input type="hidden" value="'+book.volumeInfo.ratingsCount+'" class="bookCount">');
+      });
   }
 };
 
@@ -58,7 +67,22 @@ var getBooks = function(books) {
   $('.main').append(html);
 };
 
-$(document).ready(function() {  
+var descExpand = function() {
+  $('.tracker').on('click', '.desc-expand', function(e) {
+    $(this).parent().next().css('display', 'inline');
+    $(this).parent().hide();
+  })
+}
+
+var descContract = function() {
+  $('.tracker').on('click', '.desc-contract', function(e) {
+    $(this).parent().prev().show();
+    $(this).parent().hide();
+  });
+};
+
+$(document).ready(function() { 
+
   $('.main').on('click','.addBook',function(e) {
     var $el = $(this).children("input.bookEl").val();
     var $userId = $(this).children("input.userId").val();
@@ -115,6 +139,10 @@ $(document).ready(function() {
       }
     });
   });
+
+  $('.desc-expand').on('click', function() {
+    $('.desc-hidden').show();
+  })
 });
 
 

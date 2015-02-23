@@ -6,18 +6,21 @@
   <div class="row">
     <div class="col-md-3">
     </div>
-    <div class="col-md-6 border-bot">
+    <div class="col-md-6 border-bot space-6-bot">
       <div class="row space-1-top">
-        <div class="col-md-3 bookShowImg"></div>
-        <div class="col-md-9">
+        <div class="col-md-4 bookShowImg"></div>
+        <div class="col-md-8">
           <div class="col-md-12">
 
             <div class="col-md-5 size-2 bookShowRating"></div>
-            <div class="col-md-3"></div>
-            <div class="col-md-4 lose-5-top bookShowLink"></div>
+            <div class="col-md-2"></div>
+            <div class="col-md-5 lose-5-top bookShowLink"></div>
           </div>
-          <div class="col-md-12 space-1-top">
-            <p class="space-1-top book-desc bookShowDesc"></p>
+          <div class="col-md-12">
+            <p class="col-md-12 space-1-top bookShowAuthors"></p>
+          </div>
+          <div class="col-md-12">
+            <p class="book-desc bookShowDesc"></p>
           </div>  
         </div>  
       </div>
@@ -73,4 +76,6 @@
 
 <script>
   paramsCheck();
+  descExpand();
+  descContract();
 </script>
