@@ -1,3 +1,71 @@
 // Place all the styles related to the landing controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+  font-family: 'Roboto';
+  font-weight:200;
+}
+
+.space-top-8 {
+  margin-top: 80px;
+}
+
+.space-top-4 {
+  margin-top:40px;
+}
+
+.about-first {
+  background-color: #F4F7EE;
+  color:#333;
+  height: 800px;
+}
+
+.about-second {
+  background-color: #193441;
+  color:#EFF2E9;
+  height: 800px;
+}
+
+.about-second h2 {
+  color:#EDF0E6;
+}
+
+.about-second-details {
+  height:100px;
+  color: #EDF0E6;
+}
+
+.about-second-details h3 {
+  color:#F4F7EE;
+  text-align:center;
+}
+
+.about-second-details ul {
+  list-style:none;
+}
+
+.about-second-details li {
+  margin-bottom:10px;
+  font-size:1.15em;
+}
+
+.about-img {
+  height:70%;
+  vertical-align:middle;
+}
+
+.helper {
+  display:inline-block;
+  height:100%;
+  vertical-align:middle;
+}
+
+.round-border {
+  border:1px solid #F4F7EE; 
+  height:250px;
+  width:250px;
+  text-align:center;
+  border-radius:50%;
+  margin:auto;
+}
