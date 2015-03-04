@@ -18,3 +18,6 @@ Rails.application.config.assets.precompile += %w( sessions.js )
 
 Rails.application.config.assets.precompile += %w( messages.css )
 Rails.application.config.assets.precompile += %w( messages.js )
+
+Rails.application.config.assets.precompile += %w( landing.css )
+Rails.application.config.assets.precompile += %w( landing.js )

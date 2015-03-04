@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root "books#index"
+  root "landing#index"
 
   resources :books do 
     resources :messages
@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :users do
     resources :favorites
   end  
+
+  resources :landing
 
   get "/log-in" => "sessions#new"   
 
