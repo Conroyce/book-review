@@ -3,12 +3,15 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body {
-  font-family: 'Roboto';
-  font-weight:200;
+  font-family: 'PT Sans';
 }
 
 .space-top-8 {
   margin-top: 80px;
+}
+
+.space-top-6 {
+  margin-top: 60px;
 }
 
 .space-top-4 {
@@ -16,28 +19,42 @@ body {
 }
 
 .about-first {
-  background-color: #F4F7EE;
+  position: relative;
+  font-wieght:100;
+  font-size:1.1em;
   color:#333;
-  height: 800px;
+  height: 600px;
+}
+
+.about-first-img {
+  background: url('http://cdn.business2community.com/wp-content/uploads/2014/11/easy-to-navigate.jpg.jpg');
+  background-size: 100%;
+  height:600px;
+}
+
+.about-first h1 {
+  color: #F4F7EE;
 }
 
 .about-second {
-  background-color: #193441;
-  color:#EFF2E9;
+  font-weight:100;
+  font-size: 1.1em;
+  background-color: #fff;
+  color:#193441;
   height: 800px;
 }
 
 .about-second h2 {
-  color:#EDF0E6;
+  color:#666;
 }
 
 .about-second-details {
   height:100px;
-  color: #EDF0E6;
+  color: #999;
 }
 
 .about-second-details h3 {
-  color:#F4F7EE;
+  color:#666;
   text-align:center;
 }
 
@@ -62,10 +79,23 @@ body {
 }
 
 .round-border {
-  border:1px solid #F4F7EE; 
+  border:1px solid #F2F5EC; 
   height:250px;
-  width:250px;
+  width:220px;
   text-align:center;
-  border-radius:50%;
+  border-radius:20%;
   margin:auto;
+}
+
+.dark-overlay {
+  display: table;
+  height:200px;
+  background-color:black;
+  position:absolute;
+  bottom:0;
+}
+
+.vert-center {
+  display:table-cell;
+  vertical-align:middle;
 }
