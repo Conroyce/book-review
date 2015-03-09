@@ -67,13 +67,6 @@ h2 {
   margin-right:10px;
 }
 
-.main-back {
-  border:1px solid #ddd;
-  padding-top:50px;
-  margin-top:20px;
-  border-radius: 5px;
-}
-
 .grey-back {
   background-color: #eee;
 }
@@ -261,6 +254,33 @@ size-2 {
 .desc-show {
   display: inline;
 }
+
+@media (max-width:975px) {
+  .container {
+    width:90%;
+  }
+
+  .even-div {
+    height:300px;
+    width:175px;
+    margin: 0;
+    padding: 0;
+    display:inline-block;
+    text-align:center;
+  }
+}
+
+@media (min-width: 975px) {
+
+  .main-back {
+    border:1px solid #ddd;
+    padding-top:50px;
+    margin-top:20px;
+    border-radius: 5px;
+  }
+  
+}
+
 
 
 
