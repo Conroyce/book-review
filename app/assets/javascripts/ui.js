@@ -1,4 +1,6 @@
 var booksObj = {};
+var current = 18;
+var $text;
 
 var descriptionParser = function(desc) {
   if (desc.length > 395) {
@@ -23,13 +25,19 @@ var paramsCheck = function() {
         $('.bookShowAuthors').html("<strong>By</strong> " + book.volumeInfo.authors);
         $('.bookHiddenRating').html(
           '<input type="hidden" value="'+book.volumeInfo.averageRating+'" class="bookRating"><input type="hidden" value="'+book.volumeInfo.ratingsCount+'" class="bookCount">');
-      });
+      },18);
   }
 };
 
 var getBooks = function(books) {
-  booksObj = {};
+  console.log("books: ", books.items.length,books.items)
+  if(books.items.length === 18) {
+    booksObj = {};
+    $('.main').html('')
+  }
+
   var bookList = [];
+
   for (var i = 0; i < books.items.length; i++) {
     var ans = {};
     var bookItem = {};
@@ -63,7 +71,6 @@ var getBooks = function(books) {
   var template = Handlebars.compile(source);
   var html = template({books:bookList});
 
-  $('.main').html('')
   $('.main').append(html);
 };
 
@@ -114,13 +121,13 @@ $(document).ready(function() {
 
   $('.search-div').on('submit',function(e) {
     e.preventDefault();
-    var $text = $('#searchBox').val();
+    current = 18;
+    $text = $('#searchBox').val();
     $('#searchBox').val('');
-    API.find($text,getBooks);
+    API.find($text,getBooks,18);
   });
 
   $('.addRating').on('click','.ratingSubmit',function(e) {
-    console.log("hey");
     var sPageURL = window.location.href.split('/');
     var $count = $("input.bookCount").val();
     var $oldRating = $("input.bookRating").val();
@@ -138,6 +145,18 @@ $(document).ready(function() {
         count: $count
       }
     });
+  });
+
+  $(window).scroll(function() {
+     if($(window).scrollTop() + $(window).height() == $(document).height()) {
+        if ($text) {
+          API.concatBooks($text,getBooks,12,current);
+          current += 12;
+        } else {
+          API.concatBooksAll(getBooks,12,current);
+          current += 12;
+        }
+     }
   });
 
   $('.desc-expand').on('click', function() {
