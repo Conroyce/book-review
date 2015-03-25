@@ -1,54 +1,60 @@
-<div class="space-8 container">
-  <div class="row">
-    <div class="col-md-12">
-      <h2>Favorites</h2>
-    </div>  
-  </div>
-
-  <div class="row">
-    <div class="col-md-12 grey-back">
-      <div class="centered">
-
-        <% current_user.favorites.each do |book| %>
-          <div class="col-md-2 user-book-back">
-            <div class="overlay-wrapper">
-              <a href="/books/<%= book.book_id %>">
-                <span class="focus-overlay"></span>
-                <img src="<%= book.img %>" height="200" width="150">
-              </a>
-            </div>           
-            <a href="/books/<%= book.book_id %>" class="show-book">
-              <p class="title"><%= book.title %></p>
-            </a>  
-          </div>
-        <% end %>
-
-      </div>  
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12">
-      <h2>My Reviews</h2>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-3">
-    </div>
-    <div class="col-md-6 grey-back min-height-7 ">
-
-        <% @messages.each do |message| %>
-          <div class="user_mes border-grey">
-            Book: <a href="/users/<%= message.user_id %>/messages/<%= message.id %>"><%= message.book_title %></a><br>
-            Title: <a href="/users/<%= message.user_id %>/messages/<%= message.id %>"><%= message.title %></a><br>
-            Review: <a href="/users/<%= message.user_id %>/messages/<%= message.id %>"><%= message.review %></a><br>
+<div class="space-8 container">  
+  <% if current_user.favorites.empty? && @messages.empty? %>
+    <h3 class = "centered">You haven't added any favorites or reviews</h3>
+  <% else %>  
+    <div class="row">
+      <% if !current_user.favorites.empty? %>
+        <div class="row">
+          <div class="col-md-12">
+            <h2>Favorites</h2>
           </div>  
-        <% end %> 
-    
+        </div>
+        <div class="col-md-12 grey-back">
+          <div class="centered">    
+            <% current_user.favorites.each do |book| %>
+              <div class="col-md-2 user-book-back">
+                <div class="overlay-wrapper">
+                  <a href="/books/<%= book.book_id %>">
+                    <span class="focus-overlay"></span>
+                    <img src="<%= book.img %>" height="200" width="150">
+                  </a>
+                </div>           
+                <a href="/books/<%= book.book_id %>" class="show-book">
+                  <p class="title"><%= book.title %></p>
+                </a>  
+              </div>
+            <% end %>
+          </div>  
+        </div> 
+      <% else %>
+        <div>
+          <h4 class="centered">You haven't added any favorites yet!</h4>
+        </div>  
+      <% end %>   
     </div>
-    <div class="col-md-3">
-    </div>
-  </div>    
-</div>  
+
+    <div class="row">
+      <% if !@messages.empty? %>
+        <div class="row">
+          <div class="col-md-12">
+            <h2>My Reviews</h2>
+          </div>
+        </div>
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6 grey-back min-height-7">
+          <% @messages.each do |message| %>
+            <div class="user_mes border-grey">
+              Book: <a href="/users/<%= message.user_id %>/messages/<%= message.id %>"><%= message.book_title %></a><br>
+              Title: <a href="/users/<%= message.user_id %>/messages/<%= message.id %>"><%= message.title %></a><br>
+              Review: <a href="/users/<%= message.user_id %>/messages/<%= message.id %>"><%= message.review %></a><br>
+            </div>  
+          <% end %>      
+        </div>
+      <% else %>
+        <h4 class="centered">You haven't added any reviews yet!</h4>
+      <% end %>           
+    </div> 
+  <% end %>
+</div>     
  

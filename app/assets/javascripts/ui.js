@@ -30,7 +30,6 @@ var paramsCheck = function() {
 };
 
 var getBooks = function(books) {
-  console.log("books: ", books.items.length,books.items)
   if(books.items.length === 18) {
     booksObj = {};
     $('.main').html('')
