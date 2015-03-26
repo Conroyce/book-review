@@ -61,6 +61,7 @@ var getBooks = function(books) {
 
     bookItem.book_id = books.items[i].id;
     bookItem.title = books.items[i].volumeInfo.title;
+    bookItem.img = ans.img;
     booksObj[i] = bookItem;
 
     bookList.push(ans);
@@ -90,6 +91,7 @@ var descContract = function() {
 $(document).ready(function() { 
 
   $('.main').on('click','.addBook',function(e) {
+    // e.preventDefault();
     var $el = $(this).children("input.bookEl").val();
     var $userId = $(this).children("input.userId").val();
     var book = booksObj[$el];
@@ -112,6 +114,7 @@ $(document).ready(function() {
   });
 
   $('.main').on('click','.show-book',function(e) {
+    console.log("in show book");
     var $el = $(this).children().children("input.bookEl").val();
     var book = booksObj[$el];
 

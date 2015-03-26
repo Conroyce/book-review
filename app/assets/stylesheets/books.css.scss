@@ -88,7 +88,7 @@ h2 {
 }
 
 .overlay-wrapper {
-  width:160px;
+  width:168px;
 }
 
 .focus-overlay:hover {
@@ -98,12 +98,14 @@ h2 {
 }
 
 .book-info {
+  text-align:center;
   width:150px;
   background-color:white;
   box-sizing:border-box;
   padding:5px;
+  padding-top:8px;
   color:#333;
-  height:80px;
+  height:100px;
   box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
 }
 

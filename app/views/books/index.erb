@@ -53,8 +53,8 @@
             </div>  
           </a>
           <% if current_user %>   
-            <p class="{{id}} addBook">
-              <a href="/users/<%= current_user.id %>/messages" class="addBook">Add To Favorites
+            <p class="{{id}}">
+              <a class="addBook">Add To Favorites
                 <input type="hidden" value="<%= current_user.id %>" class="userId">
                 <input type="hidden" value="{{el}}" class="bookEl">
               </a>
