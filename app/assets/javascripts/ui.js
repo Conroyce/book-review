@@ -2,6 +2,8 @@ var booksObj = {};
 var current = 18;
 var $text;
 
+
+//limits the number of characters displayed for each boot title
 var descriptionParser = function(desc) {
   if (desc.length > 395) {
     return '<p>' + desc.substr(0,395) + '...<a class="desc-expand"> Show More </a></p><p class="desc-hidden">' + desc + ' <a class="desc-contract">Hide</a></p>';
@@ -10,6 +12,7 @@ var descriptionParser = function(desc) {
   }
 };
 
+//looks at url, grabs id from url, does get request and displays data
 var paramsCheck = function() {
   var sPageURL = window.location.href.split('/');
   if (sPageURL[sPageURL.length-2] == "books") {
@@ -29,6 +32,7 @@ var paramsCheck = function() {
   }
 };
 
+//retrieves book info from api, displays info using handlebars
 var getBooks = function(books) {
   if(books.items.length === 18) {
     booksObj = {};
@@ -74,6 +78,7 @@ var getBooks = function(books) {
   $('.main').append(html);
 };
 
+//expands description in books#show view
 var descExpand = function() {
   $('.book-show').on('click', '.desc-expand', function(e) {
     $(this).parent().next().css('display', 'inline');
@@ -81,6 +86,7 @@ var descExpand = function() {
   })
 }
 
+//contracts description in books#show view
 var descContract = function() {
   $('.book-show').on('click', '.desc-contract', function(e) {
     $(this).parent().prev().show();
@@ -89,9 +95,8 @@ var descContract = function() {
 };
 
 $(document).ready(function() { 
-
+  //adds favorites
   $('.main').on('click','.addBook',function(e) {
-    // e.preventDefault();
     var $el = $(this).children("input.bookEl").val();
     var $userId = $(this).children("input.userId").val();
     var book = booksObj[$el];
@@ -113,14 +118,15 @@ $(document).ready(function() {
     });
   });
 
+  //leads to #show view
   $('.main').on('click','.show-book',function(e) {
-    console.log("in show book");
     var $el = $(this).children().children("input.bookEl").val();
     var book = booksObj[$el];
 
     $.post("/books",{ book: { book_id: book.book_id } });
   });
 
+  //creates search functionality
   $('.search-div').on('submit',function(e) {
     e.preventDefault();
     current = 18;
@@ -129,6 +135,7 @@ $(document).ready(function() {
     API.find($text,getBooks,18);
   });
 
+  //add rating functionality
   $('.addRating').on('click','.ratingSubmit',function(e) {
     var sPageURL = window.location.href.split('/');
     var $count = $("input.bookCount").val();
@@ -149,6 +156,7 @@ $(document).ready(function() {
     });
   });
 
+  //adds infinite scroll
   $(window).scroll(function() {
      if($(window).scrollTop() + $(window).height() == $(document).height()) {
         if ($text) {
@@ -161,6 +169,7 @@ $(document).ready(function() {
      }
   });
 
+  //shows complete description in books#show view
   $('.desc-expand').on('click', function() {
     $('.desc-hidden').show();
   })
