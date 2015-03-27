@@ -77,29 +77,33 @@ h2 {
 
 .even-div {
   height:400px;
+  text-align:center;
+  padding: 55px 5px;
 }
 
 .focus-overlay {
   z-index:1000;
   position:absolute;
-  width:150px;
-  height:200px;
+  width:160px;
+  height:210px;
   transition: 400ms;
 }
 
 .overlay-wrapper {
   width:168px;
+  margin:0 auto;
 }
 
 .focus-overlay:hover {
-  opacity:.3;
-  background-color:black;
+  /*opacity:.3;*/
+  box-shadow: 4px 4px 15px #888;
   transition: 400ms;
 }
 
 .book-info {
   text-align:center;
-  width:150px;
+  width:160px;
+  margin:0 auto;
   background-color:white;
   box-sizing:border-box;
   padding:5px;
@@ -121,7 +125,7 @@ h2 {
 }
 
 .book-info .title {
-  margin-bottom: -2px;
+  margin-bottom: -1px;
   font-size:1.1em;
 }
 
@@ -212,7 +216,7 @@ a.addBook {
 }
 
 div h1 .homeLink {
-  color: #eee;
+  color: #666;
   font-size:.9em;
 }
 
@@ -276,7 +280,6 @@ size-2 {
 
   .main-back {
     border:1px solid #ddd;
-    padding-top:50px;
     margin-top:20px;
     border-radius: 5px;
   }
