@@ -5,7 +5,8 @@ class BooksController < ApplicationController
   end  
 
   def create
-    @book = Book.find_by(book_id: params[:book][:book_id]) || Book.create(book_params)     
+    @book = Book.find_by(book_id: params[:book][:book_id]) || Book.create(book_params)
+    render :json => @book     
   end  
 
   def show

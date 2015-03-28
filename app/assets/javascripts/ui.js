@@ -14,12 +14,27 @@ var descriptionParser = function(desc) {
 
 //looks at url, grabs id from url, does get request and displays data
 var paramsCheck = function() {
+  //splits url in [address,books,book_id]
   var sPageURL = window.location.href.split('/');
+  var id = sPageURL.length - 1;
+
+  //check if id starts with "-" (this causes problems when searching)
+  if (sPageURL[id][0] == "-") {
+    sPageURL[id] = sPageURL[id].substr(1,sPageURL[id].length-1);
+    console.log(sPageURL[id]);
+  }  
+
   if (sPageURL[sPageURL.length-2] == "books") {
-    API.find(sPageURL[sPageURL.length-1], 
+    API.find(sPageURL[id], 
       function(data) {
         var book = data.items[0];
-        var description = descriptionParser(book.volumeInfo.description);
+        var description = book.volumeInfo.description;
+        if (typeof description != "undefined") {
+          description = descriptionParser(book.volumeInfo.description);
+        } else {
+          description = "N/A";
+        }
+        
         $('.bookShowTitle').html(book.volumeInfo.title);
         $('.bookShowImg').html('<img width="100%" src="' + book.volumeInfo.imageLinks.thumbnail + '">');
         $('.bookShowRating').html('<strong>Rating:</strong> ' + book.volumeInfo.averageRating+ " / 5");
@@ -28,7 +43,7 @@ var paramsCheck = function() {
         $('.bookShowAuthors').html("<strong>By</strong> " + book.volumeInfo.authors);
         $('.bookHiddenRating').html(
           '<input type="hidden" value="'+book.volumeInfo.averageRating+'" class="bookRating"><input type="hidden" value="'+book.volumeInfo.ratingsCount+'" class="bookCount">');
-      },18);
+      },1);
   }
 };
 
@@ -45,6 +60,7 @@ var getBooks = function(books) {
     var ans = {};
     var bookItem = {};
     var checkTitle = books.items[i].volumeInfo.title.split("");
+    var authors = books.items[i].volumeInfo.authors;
 
     if (checkTitle.length > 28) {
       ans.dispTitle = checkTitle.join("").substr(0,28)+"...";      
@@ -58,7 +74,14 @@ var getBooks = function(books) {
       ans.img = books.items[i].volumeInfo.imageLinks.thumbnail;
     } 
 
-    ans.authors = books.items[i].volumeInfo.authors;
+    if (typeof authors != "undefined") {
+      if (authors.length > 1) {
+        ans.authors = authors.join(", ");
+      } else {
+        ans.authors = authors;
+      }
+    }  
+   
     ans.description = books.items[i].volumeInfo.description;
     ans.id = books.items[i].id;
     ans.el = i;
@@ -122,7 +145,7 @@ $(document).ready(function() {
   $('.main').on('click','.show-book',function(e) {
     var $el = $(this).children().children("input.bookEl").val();
     var book = booksObj[$el];
-
+    console.log("show book: ",$el, book)
     $.post("/books",{ book: { book_id: book.book_id } });
   });
 

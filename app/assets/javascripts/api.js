@@ -1,6 +1,6 @@
 window.API = (function() {
   var start = "https://www.googleapis.com/books/v1/volumes"
-  var allBooks = "https://www.googleapis.com/books/v1/volumes?q=Fiction&maxResults=";
+  var allBooks = "https://www.googleapis.com/books/v1/volumes?q=Best%20Selling&maxResults=";
   var max = "&maxResults=";
   var search = "&searchIndex=";
 
