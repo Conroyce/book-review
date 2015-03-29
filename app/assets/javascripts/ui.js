@@ -1,5 +1,6 @@
 var booksObj = {};
 var current = 18;
+var num = 0;
 var $text;
 
 
@@ -49,10 +50,6 @@ var paramsCheck = function() {
 
 //retrieves book info from api, displays info using handlebars
 var getBooks = function(books) {
-  if(books.items.length === 18) {
-    booksObj = {};
-    $('.main').html('')
-  }
 
   var bookList = [];
 
@@ -84,12 +81,13 @@ var getBooks = function(books) {
    
     ans.description = books.items[i].volumeInfo.description;
     ans.id = books.items[i].id;
-    ans.el = i;
+    ans.el = num;
 
     bookItem.book_id = books.items[i].id;
     bookItem.title = books.items[i].volumeInfo.title;
     bookItem.img = ans.img;
-    booksObj[i] = bookItem;
+    booksObj[num] = bookItem;
+    num++;
 
     bookList.push(ans);
   };
@@ -100,6 +98,13 @@ var getBooks = function(books) {
 
   $('.main').append(html);
 };
+
+//adds functionality to getBooks when searching. booksObj is reset when doing a search
+var searchBooks = function(books) {
+  booksObj = {};
+  $('.main').html('');
+  getBooks(books);
+}
 
 //expands description in books#show view
 var descExpand = function() {
@@ -145,17 +150,17 @@ $(document).ready(function() {
   $('.main').on('click','.show-book',function(e) {
     var $el = $(this).children().children("input.bookEl").val();
     var book = booksObj[$el];
-    console.log("show book: ",$el, book)
     $.post("/books",{ book: { book_id: book.book_id } });
   });
 
   //creates search functionality
   $('.search-div').on('submit',function(e) {
     e.preventDefault();
+    booksObj= {};
     current = 18;
     $text = $('#searchBox').val();
     $('#searchBox').val('');
-    API.find($text,getBooks,18);
+    API.find($text,searchBooks,18);
   });
 
   //add rating functionality
